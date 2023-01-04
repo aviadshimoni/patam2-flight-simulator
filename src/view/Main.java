@@ -15,12 +15,10 @@ public class Main extends Application {
         System.out.println(getClass().getResource(url).getPath());
         FXMLLoader fxml= new FXMLLoader(getClass().getResource(url));
         Parent root = fxml.load();
-        primaryStage.setTitle("Flight Gear Simulator");
+        primaryStage.setTitle("TIOA Flight simulator v0.666");
         ControllerView controllerView = fxml.getController();
-        primaryStage.setScene(new Scene(root, 970, 630));
+        primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
-
-
     }
 
 

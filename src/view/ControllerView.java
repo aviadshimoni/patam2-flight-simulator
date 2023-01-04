@@ -14,12 +14,8 @@ public class ControllerView extends Pane implements Observer {
     @FXML
     Joystick Joystick;
 
-    @FXML
-    AnchorPane adAnchorPane;
 
     void init() {
-        adAnchorPane.setLayoutX(330);
-        adAnchorPane.setLayoutY(200);
     }
 
     @Override
