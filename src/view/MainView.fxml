@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import view.views.Joystic.* ?>
+
+
+<Pane fx:id="board" maxHeight="-Infinity" style="-fx-background-color: #fff;" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="393.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ControllerView">
+   <children>
+      <Joystick fx:id="Joystick" layoutX="780"/>
+   </children>
+</Pane>
