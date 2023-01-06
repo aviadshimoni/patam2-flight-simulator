@@ -3,14 +3,14 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 
-public class FlightSettings implements Serializable {
+public class FlightSetting implements Serializable {
 
     private List<Attribute> attributes;
     private Integer playSpeed;
     private String ip;
     private Double port;
 
-    public FlightSettings() {}
+    public FlightSetting() {}
 
     public List<Attribute> getAttributes() {
         return attributes;

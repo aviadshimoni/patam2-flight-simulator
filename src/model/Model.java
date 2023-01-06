@@ -1,6 +1,8 @@
 package model;
 
-import algorithms.*;
+import algorithms.SimpleAnomalyDetector;
+import algorithms.ZScoreAlgorithm;
+import algorithms.hybridAlgorithm;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +20,6 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 public class Model extends Observable implements SimulatorModel {
@@ -51,9 +52,9 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     @Override
-    public boolean ConnectToServer(String ip, double port) {
+    public boolean connectToServer(String ip, double port) {
         try {
-            socket = new Socket("127.0.0.1", 5403);
+            socket = new Socket("127.0.0.1", 5402);
             out = new PrintWriter(socket.getOutputStream());
             return true;
 
@@ -63,7 +64,6 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     synchronized public void playFile() {
-        // convert ugly if-else to function
         if (options.afterForward) {  //somehow it does not responded to it and cannot go back to normal rate
             options.afterForward = false;
             properties.setPlaySpeed(100);
@@ -84,7 +84,7 @@ public class Model extends Observable implements SimulatorModel {
                 options.afterStop = false;
             }
         } else {    //first time of Play
-            isConnect = ConnectToServer(properties.getIp(), properties.getPort());
+            isConnect = connectToServer(properties.getIp(), properties.getPort());
             if (isConnect) {
                 displaySetting = new Thread(() -> displayFlight(true), "Thread of displaySetting function");
                 displaySetting.start();
@@ -95,7 +95,7 @@ public class Model extends Observable implements SimulatorModel {
         }
     }
 
-    synchronized public void displayFlight(boolean conncetServer) {
+    synchronized public void displayFlight(boolean isConnected) {
         int i = 0;
         int sizeTS = tsAnomal.getSize();
 
@@ -135,7 +135,7 @@ public class Model extends Observable implements SimulatorModel {
                     e.printStackTrace();
                 }
             }
-            if (conncetServer) {
+            if (isConnected) {
                 out.println(tsAnomal.rows.get(i));
                 out.flush();
             }
@@ -222,46 +222,37 @@ public class Model extends Observable implements SimulatorModel {
 
         if (algName.equals("hybridAlgorithm")) {
             hyperALG = (hybridAlgorithm) c.newInstance();
-            new Thread(() -> initData()).start();   //needs if to init data at first time
+            new Thread(() -> initAlgorithmData()).start();   //needs if to init data at first time
             hyperALG.learnNormal(tsReg);
             hyperALG.detect(tsAnomal);
 
         } else if (algName.equals("SimpleAnomalyDetector")) {
             ad = (SimpleAnomalyDetector) c.newInstance();
-            new Thread(() -> initData()).start();
+            new Thread(() -> initAlgorithmData()).start();
             ad.learnNormal(tsReg);
             ad.detect(tsAnomal);
         } else if (algName.equals("ZScoreAlgorithm")) {
             zScore = (ZScoreAlgorithm) c.newInstance();
-            new Thread(() -> initData()).start();
+            new Thread(() -> initAlgorithmData()).start();
             zScore.learnNormal(tsReg);
             zScore.detect(tsAnomal);
         }
         return false;
     }
 
-    public void initData() {
-        setVariablesToAlg();
-        setVariablesNamesToAlg();
-    }
-
-    public void setVariablesToAlg() {//listen to timeStep and init line chart of reg
-        if (algName.equals("SimpleAnomalyDetector"))
+    public void initAlgorithmData() {
+        if (algName.equals("SimpleAnomalyDetector")) {
             ad.timeStep.bind(timeStep);
-        else if (algName.equals("ZScoreAlgorithm"))
-            zScore.timeStep.bind(timeStep);
-        else
-            hyperALG.timeStep.bind(timeStep);
-    }
-
-    public void setVariablesNamesToAlg() { //Listen to chosen attribute
-        if (algName.equals("SimpleAnomalyDetector"))
             ad.attribute1.bind(attribute1);
-
-        else if (algName.equals("ZScoreAlgorithm"))
-            zScore.Attribute.bind(attribute1);
-        else
+        }
+        else if (algName.equals("ZScoreAlgorithm")) {
+            zScore.timeStep.bind(timeStep);
+            zScore.attribute1.bind(attribute1);
+        }
+        else {
+            hyperALG.timeStep.bind(timeStep);
             hyperALG.attribute1.bind(attribute1);
+        }
     }
 
     public Callable<AnchorPane> getPainter() {
@@ -319,18 +310,18 @@ public class Model extends Observable implements SimulatorModel {
         });
 
         List<Attribute> lst = new ArrayList<>();
-        lst.add(createAtrribute("aileron", 0, -1, 1));
-        lst.add(createAtrribute("elevators", 1, -1, 1));
-        lst.add(createAtrribute("rudder", 2, 0, 1));
-        lst.add(createAtrribute("throttle", 6, 0, 1));
-        lst.add(createAtrribute("altimeter", 25, null, null));
-        lst.add(createAtrribute("airSpeed", 24, null, null));
-        lst.add(createAtrribute("fd", 36, 0, 360));
-        lst.add(createAtrribute("pitch", 29, -10, 17));
-        lst.add(createAtrribute("roll", 17, -38, 43));
-        lst.add(createAtrribute("yaw", 20, -29, 91));
+        lst.add(createAttribute("aileron", 0, -1, 1));
+        lst.add(createAttribute("elevators", 1, -1, 1));
+        lst.add(createAttribute("rudder", 2, 0, 1));
+        lst.add(createAttribute("throttle", 6, 0, 1));
+        lst.add(createAttribute("altimeter", 25, null, null));
+        lst.add(createAttribute("airSpeed", 24, null, null));
+        lst.add(createAttribute("fd", 36, 0, 360));
+        lst.add(createAttribute("pitch", 29, -10, 17));
+        lst.add(createAttribute("roll", 17, -38, 43));
+        lst.add(createAttribute("yaw", 20, -29, 91));
         settings.setAttributes(lst);
-        settings.setPort((double) 5403);
+        settings.setPort((double) 5402);
         settings.setIp("127.0.0.1");
         settings.setPlaySpeed(100);
 
@@ -339,7 +330,7 @@ public class Model extends Observable implements SimulatorModel {
         fos.close();
     }
 
-    public Attribute createAtrribute(String name, Integer associativeName, Integer min, Integer max) {
+    public Attribute createAttribute(String name, Integer associativeName, Integer min, Integer max) {
         Attribute res = new Attribute();
         res.setName(name);
         res.setAssociativeName(associativeName);
