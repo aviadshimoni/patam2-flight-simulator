@@ -1,0 +1,66 @@
+.button {
+  -fx-background-color: rgb(17, 4, 88); /* Purple dark */
+  -fx-text-fill: white;
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-padding: 4px 8px;
+  -fx-border-radius: 4px;
+}
+
+.button:hover {
+  -fx-background-color: rgb(121, 4, 235); /* Purple light */
+  -fx-cursor: hand;
+}
+
+.button:pressed {
+  -fx-background-color: rgb(255, 0, 161); /* Redish pink */
+}
+
+.button:disabled {
+  -fx-background-color: rgb(254, 118, 255); /* Pink */
+  -fx-text-fill: rgba(255, 255, 255, 0.5);
+}
+
+.label {
+  -fx-text-fill: rgb(255, 17, 79); /* Red */
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+}
+
+.slider .track {
+  -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #7904eb 0%, #ff00a1 50%, #7904eb 100%);
+}
+
+.slider .thumb {
+  -fx-background-color: white;
+  -fx-border-radius: 50%;
+  -fx-border-width: 1px;
+  -fx-border-color: black;
+}
+
+.choice-box {
+  -fx-border-color: #7904eb; /* Purple */
+  -fx-border-radius: 4px;
+  -fx-background-color: rgb(17, 4, 88);
+  -fx-border-width: 1px;
+  -fx-padding: 4px;
+}
+
+.choice-box .label {
+  -fx-text-fill: #ff00a1; /* Pink */
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+}
+
+.choice-box .arrow {
+  -fx-background-color: #ff00a1;; /* Purple */
+}
+
+.text-field {
+  -fx-border-color: #7904eb; /* Purple */
+  -fx-border-radius: 4px;
+  -fx-border-width: 1px;
+  -fx-padding: 8px;
+  -fx-prompt-text-fill: #ff00a1; /* Pink */
+  -fx-font-size: 14px;
+}

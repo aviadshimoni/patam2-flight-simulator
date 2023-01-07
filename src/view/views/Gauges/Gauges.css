@@ -5,11 +5,6 @@
     -fx-stroke-width: 0.5;
 }
 
-.gauge {
-    -fx-tick-label-font: 180px "Arial";
-    -fx-tick-label-color: blue;
-}
-
 .data-pane-border{
     -fx-border-style: solid;
     -fx-border-width: 2px;

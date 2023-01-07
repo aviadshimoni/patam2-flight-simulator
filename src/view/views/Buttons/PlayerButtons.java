@@ -1,10 +1,10 @@
-package view.views.btn;
+package view.views.Buttons;
 
 import javafx.beans.property.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.*;
-
 import java.io.IOException;
+
 
 public class PlayerButtons extends AnchorPane {
     public DoubleProperty sliderTime, choiceSpeed;
@@ -14,7 +14,7 @@ public class PlayerButtons extends AnchorPane {
 
     public PlayerButtons() {
         super();
-        FXMLLoader fxmlL = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerButtons.fxml"));
         sliderTime = new SimpleDoubleProperty();
         choiceSpeed = new SimpleDoubleProperty();
 
@@ -48,8 +48,8 @@ public class PlayerButtons extends AnchorPane {
         onForward.setValue(false);
 
         try {
-            AnchorPane buttons= fxmlL.load(getClass().getResource("PlayerButtons.fxml").openStream());
-            PlayerButtonsController playerButtonsController= fxmlL.getController();
+            AnchorPane buttons= loader.load();
+            PlayerButtonsController playerButtonsController= loader.getController();
             playerButtonsController.init();
 
             playerButtonsController.milliSec.textProperty().bind(milliSec);
