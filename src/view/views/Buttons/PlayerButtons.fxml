@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="160" prefWidth="955" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.views.Buttons.PlayerButtonsController" stylesheets="@PlayerButtons.css">
+   <children>
+      <Button layoutX="8" layoutY="-435" mnemonicParsing="false" onAction="#onOpenXML" prefHeight="31" prefWidth="105" text="Choose XML" ></Button>
+      <Button layoutX="8" layoutY="-470" mnemonicParsing="false" onAction="#onOpenCSVTrain" prefHeight="31" prefWidth="142"  text="Choose CSV Train" textAlignment="CENTER"></Button>
+      <Button layoutX="120" layoutY="-435" mnemonicParsing="false" onAction="#onAnomalyDetector" prefHeight="31" prefWidth="181" text="Load Anomaly Detector" textFill="#000000"></Button>
+      <Button layoutX="159" layoutY="-470" mnemonicParsing="false" onAction="#onOpenCSVTest" prefHeight="31" prefWidth="142" text="Choose CSV Test" textAlignment="CENTER" textFill="#000000"></Button>
+      <Button layoutX="59" layoutY="82" mnemonicParsing="false" onAction="#onPlay" prefHeight="35" prefWidth="40" text="⏵" textAlignment="CENTER" ></Button>
+      <Button layoutX="166" layoutY="82" mnemonicParsing="false" onAction="#onStop" prefHeight="35" prefWidth="40" text="⏹" ></Button>
+      <Button layoutX="112" layoutY="82" mnemonicParsing="false" onAction="#onPause" prefHeight="35" prefWidth="40" text="⏸" ></Button>
+      <Button layoutX="220" layoutY="82" mnemonicParsing="false" onAction="#onForward" prefHeight="35" prefWidth="40" text="⏩" ></Button>
+      <Button layoutX="8" layoutY="82" mnemonicParsing="false" onAction="#onRewind" prefHeight="35" prefWidth="40" text="⏪" ></Button>
+      <Label layoutX="270" layoutY="89" text="Speed:" textFill="#000000"></Label>
+      <ChoiceBox fx:id="choiceSpeed" layoutX="325" layoutY="80" prefHeight="25"  prefWidth="50"/>
+
+      <TextField fx:id="minutes" layoutX="750" layoutY="88" prefHeight="25" prefWidth="38" promptText="00"/>
+      <TextField fx:id="milliSec" layoutX="848" layoutY="88" prefHeight="25" prefWidth="38" promptText="00"/>
+      <TextField fx:id="seconds" layoutX="799" layoutY="88" prefHeight="25" prefWidth="38" promptText="00"/>
+
+      <Text fill="#000000" layoutX="790" layoutY="107" strokeType="OUTSIDE" strokeWidth="0" text=":">
+         <font>
+            <Font name="Tahoma" size="19" />
+         </font>
+      </Text>
+      <Text fill="#000000" layoutX="839" layoutY="107" strokeType="OUTSIDE" strokeWidth="0" text=":">
+         <font>
+            <Font name="Tahoma" size="19" />
+         </font>
+      </Text>
+      <Slider fx:id="sliderTime" layoutX="3" layoutY="130" max="2174" prefHeight="16" prefWidth="949" />
+
+   </children>
+</AnchorPane>
