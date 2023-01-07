@@ -3,12 +3,9 @@
 <?import eu.hansolo.medusa.Gauge?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
-
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.HBox?>
+
 <AnchorPane prefHeight="260" prefWidth="497" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.views.Gauges.GaugesController" stylesheets="@Gauges.css">
    <children>
       <HBox styleClass="data-pane-border" layoutY="150" >

@@ -255,6 +255,15 @@ public class Model extends Observable implements SimulatorModel {
         }
     }
 
+    public void bindAlgorithmToTimestep() {
+        if (algName.equals("SimpleAnomalyDetector"))
+            ad.timeStep.bind(timeStep);
+        else if (algName.equals("ZScoreAlgorithm"))
+            zScore.timeStep.bind(timeStep);
+        else
+            hyperALG.timeStep.bind(timeStep);
+    }
+
     public Callable<AnchorPane> getPainter() {
         if (algName.equals("SimpleAnomalyDetector"))    // Reg
             return () -> ad.paint();
