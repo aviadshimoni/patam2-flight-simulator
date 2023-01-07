@@ -48,7 +48,7 @@ public class JoystickController {
         circle.fillOval(circleCenterX, circleCenterY, radius, radius);
         circle_outline.strokeOval(middleX - radius,middleY - radius,radius*2,radius*2);
 
-        circle.setFill(Color.rgb(255, 17, 79));
+        circle.setFill(Color.web("#7904eb"));
         circle_outline.setLineWidth(2);
     }
 }
