@@ -6,7 +6,9 @@ import javafx.scene.layout.Pane;
 import java.util.Observable;
 import java.util.Observer;
 import view.views.Joystic.Joystick;
+import view.views.btn.PlayerButtons;
 import view.views.Gauges.Gauges;
+
 
 public class ControllerView extends Pane implements Observer {
 
@@ -15,6 +17,7 @@ public class ControllerView extends Pane implements Observer {
     Joystick Joystick;
 
     @FXML
+    PlayerButtons playerButtons;
     Gauges timeBoard;
 
 
