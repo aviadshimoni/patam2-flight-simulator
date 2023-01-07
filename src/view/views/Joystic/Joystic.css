@@ -1,0 +1,17 @@
+#rudder .track {
+    -fx-background-color: linear-gradient(to left, #7904eb, #ff00a1);
+    -fx-background-radius: 0;
+}
+
+#rudder .thumb  {
+    -fx-pref-height: 20px
+}
+
+#throttle .track {
+    -fx-background-color: linear-gradient(to bottom, #7904eb, #ff00a1);
+    -fx-background-radius: 0;
+}
+
+#throttle .thumb  {
+    -fx-pref-Width: 20px
+}

@@ -1,5 +1,5 @@
 Red = rgb(255, 17, 79)
 Redish pink = rgb(255, 0, 161)
-pink = rgb(254, 118, 255)
+pink = rgb(254, 118, 255) #fe76ff
 purple_light = rgb(121, 4, 235)
 prple_dark = rgb(17, 4, 88)
