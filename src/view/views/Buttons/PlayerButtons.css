@@ -64,3 +64,11 @@
   -fx-prompt-text-fill: #ff00a1; /* Pink */
   -fx-font-size: 14px;
 }
+
+.coloms{
+    -fx-text-background-fill: #ff00a1; /* Pink */
+    -fx-font: 20px Tahoma;
+    -fx-font-weight: bold;
+    -fx-stroke-type: null;
+    -fx-stroke-width: 0;
+}

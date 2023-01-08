@@ -23,21 +23,16 @@
       <Label layoutX="270" layoutY="89" text="Speed:" textFill="#000000"></Label>
       <ChoiceBox fx:id="choiceSpeed" layoutX="325" layoutY="80" prefHeight="25"  prefWidth="50"/>
 
-      <TextField fx:id="minutes" layoutX="750" layoutY="88" prefHeight="25" prefWidth="38" promptText="00"/>
-      <TextField fx:id="milliSec" layoutX="848" layoutY="88" prefHeight="25" prefWidth="38" promptText="00"/>
-      <TextField fx:id="seconds" layoutX="799" layoutY="88" prefHeight="25" prefWidth="38" promptText="00"/>
+      <TextField fx:id="minutes" layoutX="800" layoutY="80" prefHeight="25" prefWidth="38" promptText="00"/>
+      <Text styleClass="coloms" layoutX="840" layoutY="107" text=":"></Text>
+      <TextField fx:id="seconds" layoutX="850" layoutY="80" prefHeight="25" prefWidth="38" promptText="00"/>
+      <Text styleClass="coloms" layoutX="890" layoutY="107" text=":"></Text>
+      <TextField fx:id="milliSec" layoutX="900" layoutY="80" prefHeight="25" prefWidth="38" promptText="00"/>
 
-      <Text fill="#000000" layoutX="790" layoutY="107" strokeType="OUTSIDE" strokeWidth="0" text=":">
-         <font>
-            <Font name="Tahoma" size="19" />
-         </font>
-      </Text>
-      <Text fill="#000000" layoutX="839" layoutY="107" strokeType="OUTSIDE" strokeWidth="0" text=":">
-         <font>
-            <Font name="Tahoma" size="19" />
-         </font>
-      </Text>
-      <Slider fx:id="sliderTime" layoutX="3" layoutY="130" max="2174" prefHeight="16" prefWidth="949" />
+
+
+
+      <Slider fx:id="sliderTime" layoutX="3" layoutY="130" max="2174" prefHeight="16" prefWidth="1050" />
 
    </children>
 </AnchorPane>

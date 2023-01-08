@@ -8,9 +8,9 @@
 
 <Pane fx:id="board" maxHeight="-Infinity" style="-fx-background-color: #fff;" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="393.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ControllerView">
    <children>
-      <Joystick fx:id="Joystick" layoutX="780" layoutY="30"/>
-      <Graphs fx:id="graphs" layoutX="313" layoutY="27"/>
-      <PlayerButtons fx:id="playerButtons" layoutX="9" layoutY="470" />
-      <Gauges fx:id="gauges" layoutX="470" layoutY="285"/>
+      <Joystick fx:id="Joystick" layoutX="850" layoutY="30"/>
+      <Graphs fx:id="graphs" layoutX="320" layoutY="30"/>
+      <PlayerButtons fx:id="playerButtons" layoutX="9" layoutY="500" />
+      <Gauges fx:id="gauges" layoutX="600" layoutY="285"/>
    </children>
 </Pane>
