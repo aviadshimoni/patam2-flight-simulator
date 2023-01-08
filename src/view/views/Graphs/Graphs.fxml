@@ -3,25 +3,33 @@
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.views.Graphs.GraphsController">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.views.Graphs.GraphsController" stylesheets="@Graphs.css,@../global/global.css">
    <children>
-       <Text styleClass="data-text" layoutX="20.0" layoutY="-5.0" text="Chosen Attribute: "></Text>
-       <LineChart fx:id="chosenAttributeGraph" layoutX="-16.0" layoutY="-5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="240.0">
-         <xAxis>
-            <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis fx:id="yAxis" side="LEFT" />
-         </yAxis>
-      </LineChart>
-       <Text styleClass="data-text" layoutX="230" layoutY="-5.0" text="Most Correlated Attribute:"></Text>
-      <LineChart fx:id="mostCorrelatedAttribute" layoutX="230.0" layoutY="-5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="240.0">
-         <xAxis>
-            <CategoryAxis side="BOTTOM" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </LineChart>
+       <HBox spacing="15">
+           <VBox styleClass="data-pane-border">
+                <Text styleClass="data-text" layoutX="20.0" layoutY="-5.0" text="Chosen Attribute: "></Text>
+                <LineChart fx:id="chosenAttributeGraph" styleClass="cyberpunk-line-chart" layoutX="-20.0" layoutY="-5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="240.0">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="yAxis" side="LEFT" />
+                    </yAxis>
+                </LineChart>
+           </VBox>
+           <VBox styleClass="data-pane-border">
+           <Text styleClass="data-text" layoutX="240" layoutY="-5.0" text="Most Correlated Attribute:"></Text>
+               <LineChart fx:id="mostCorrelatedAttribute" styleClass="cyberpunk-line-chart" layoutX="240.0" layoutY="-5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="240.0">
+                   <xAxis>
+                       <CategoryAxis side="BOTTOM" />
+                   </xAxis>
+                   <yAxis>
+                       <NumberAxis side="LEFT" />
+                   </yAxis>
+               </LineChart>
+           </VBox>
+       </HBox>
    </children>
 </AnchorPane>

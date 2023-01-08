@@ -17,7 +17,7 @@ public class Graphs extends AnchorPane {
 
     public Graphs() {
         super();
-        FXMLLoader fxmlL = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Graphs.fxml"));
 
         selectedAttribute = new SimpleStringProperty();
         correlatedAttribute = new SimpleStringProperty();
@@ -28,8 +28,8 @@ public class Graphs extends AnchorPane {
         sizeTS = new SimpleIntegerProperty();
 
         try {
-            AnchorPane graphAP = fxmlL.load(getClass().getResource("Graphs.fxml").openStream());
-            graphsController = fxmlL.getController();
+            AnchorPane graphAP = loader.load();
+            graphsController = loader.getController();
             graphsController.init();
 
             graphsController.value.bind(value);

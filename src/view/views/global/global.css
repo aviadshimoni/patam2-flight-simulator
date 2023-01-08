@@ -1,0 +1,14 @@
+.data-text{
+    -fx-font: 20px Tahoma;
+    -fx-fill: #7904eb; /* Purple */
+    -fx-stroke: black;
+    -fx-stroke-width: 0.5;
+}
+
+.data-pane-border{
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}

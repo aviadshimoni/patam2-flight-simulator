@@ -17,7 +17,7 @@ public class Main extends Application {
         Parent root = fxml.load();
         primaryStage.setTitle("TIOA Flight simulator v0.666");
         ControllerView controllerView = fxml.getController();
-        primaryStage.setScene(new Scene(root, 1000, 650));
+        primaryStage.setScene(new Scene(root, 1100, 650));
         primaryStage.show();
     }
 
