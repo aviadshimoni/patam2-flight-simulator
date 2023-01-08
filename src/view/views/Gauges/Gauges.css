@@ -1,6 +1,6 @@
 .data-text{
     -fx-font: 20px Tahoma;
-    -fx-fill: linear-gradient(to left, #7904eb, #ff00a1);
+    -fx-fill: #7904eb; /* Purple */
     -fx-stroke: black;
     -fx-stroke-width: 0.5;
 }
@@ -9,4 +9,5 @@
     -fx-border-style: solid;
     -fx-border-width: 2px;
     -fx-border-color: black;
+    -fx-background-color: transparent;
 }

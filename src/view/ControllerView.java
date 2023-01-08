@@ -8,8 +8,8 @@ import java.util.Observer;
 
 import view.views.Graphs.Graphs;
 import view.views.Joystic.Joystick;
-import view.views.Buttons.PlayerButtons;
 import view.views.Gauges.Gauges;
+import view.views.Buttons.PlayerButtons;
 
 
 public class ControllerView extends Pane implements Observer {
