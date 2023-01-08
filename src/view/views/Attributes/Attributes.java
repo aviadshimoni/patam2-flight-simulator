@@ -24,7 +24,6 @@ public class Attributes extends AnchorPane {
             AnchorPane list = Loader.load();
             attributesController = Loader.getController();
             chosenAttribute.bind(attributesController.listView.getSelectionModel().selectedItemProperty());
-
             this.getChildren().add(list);
         } catch (IOException e) {
         }

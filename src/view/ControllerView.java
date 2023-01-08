@@ -10,13 +10,14 @@ import view.views.Graphs.Graphs;
 import view.views.Joystic.Joystick;
 import view.views.Gauges.Gauges;
 import view.views.Buttons.PlayerButtons;
+import view.views.Attributes.Attributes;
 
 
 public class ControllerView extends Pane implements Observer {
 
 
     @FXML
-    Joystick Joystick;
+    Joystick joystick;
 
     @FXML
     PlayerButtons playerButtons;
@@ -26,6 +27,9 @@ public class ControllerView extends Pane implements Observer {
 
     @FXML
     Graphs graphs;
+
+    @FXML
+    Attributes listView;
 
 
     void init() {

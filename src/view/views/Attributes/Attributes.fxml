@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ListCell?>
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.views.Attributes.AttributesController" stylesheets="@../global/global.css">
    <children>
-      <ListView fx:id="listView" prefHeight="344.0" prefWidth="200.0"  styleClass="data-pane-border"/>
+      <ListView fx:id="listView" prefHeight="450.0" prefWidth="200.0"  styleClass="data-pane-border"></ListView>
    </children>
 </AnchorPane>
