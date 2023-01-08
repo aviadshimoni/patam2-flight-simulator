@@ -1,4 +1,4 @@
-package view.views.btn;
+package view.views.Buttons;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -54,6 +54,7 @@ public class PlayerButtonsController {
     public void init() {
         ObservableList<Double> speedOptionsList = FXCollections.observableArrayList(0.5, 1.0, 1.5, 2.0, 2.5);
         choiceSpeed.setItems(speedOptionsList);
+        choiceSpeed.setValue(1.0);
     }
 
     public void onOpenCSVTrain() {

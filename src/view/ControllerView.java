@@ -8,7 +8,7 @@ import java.util.Observer;
 
 import view.views.Graphs.Graphs;
 import view.views.Joystic.Joystick;
-import view.views.btn.PlayerButtons;
+import view.views.Buttons.PlayerButtons;
 import view.views.Gauges.Gauges;
 
 
@@ -22,7 +22,7 @@ public class ControllerView extends Pane implements Observer {
     PlayerButtons playerButtons;
 
     @FXML
-    Gauges timeBoard;
+    Gauges gauges;
 
     @FXML
     Graphs graphs;
