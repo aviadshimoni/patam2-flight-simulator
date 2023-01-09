@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class TimeSeries {
 
-    public ArrayList<CorrelatedFeatures> cf;
+    public ArrayList<CorrelatedFeatures> correlatedFeatures;
 
     public Map<String, ArrayList<Float>> timeSeries;
     public Map<Integer, ArrayList<Float>> timeSeriesNumber;
@@ -43,16 +43,16 @@ public class TimeSeries {
             BufferedReader in = new BufferedReader(new FileReader(csvFileName));
             String line = in.readLine();
             int j = 0;
-            for (String att : line.split(",")) {
-                attributes.add(att);
-                timeSeries.put(att, new ArrayList<>());
+            for (String attribute : line.split(",")) {
+                attributes.add(attribute);
+                timeSeries.put(attribute, new ArrayList<>());
                 timeSeriesNumber.put(j++, new ArrayList<>());
             }
             while ((line = in.readLine()) != null) {
                 int i = 0;
-                for (String val : line.split(",")) {
-                    timeSeries.get(attributes.get(i)).add(Float.parseFloat(val));
-                    timeSeriesNumber.get(i).add(Float.parseFloat(val));
+                for (String attributeValue : line.split(",")) {
+                    timeSeries.get(attributes.get(i)).add(Float.parseFloat(attributeValue));
+                    timeSeriesNumber.get(i).add(Float.parseFloat(attributeValue));
                     i++;
                 }
                 rows.add(line);
@@ -120,28 +120,27 @@ public class TimeSeries {
     }
 
     public void checkCorrelate(TimeSeries ts) {
-        cf = new ArrayList<>();
-        ArrayList<String> atts = ts.getAttributes();
+        correlatedFeatures = new ArrayList<>();
+        ArrayList<String> tsAttributes = ts.getAttributes();
         int len = ts.timeSeries.get(ts.attributes.get(0)).size();
 
-        float vals[][] = new float[atts.size()][len];
-        for (int i = 0; i < atts.size(); i++) {
-            for (int j = 0; j < len; j++) {
-//                vals[i][j] = ts.getAttributeData(atts.get(i)).get(j);
-                vals[i][j] =ts.getValueByTime(atts.get(i),j);
+        float vals[][] = new float[tsAttributes.size()][len];
+        for (int i = 0; i < tsAttributes.size() ; i++) {
+            for (int j = 0; j < len ; j++) {
+                vals[i][j] = ts.getValueByTime(tsAttributes.get(i),j);
             }
         }
 
-        for (int i = 0; i < atts.size(); i++) {
-            for (int j = i + 1; j < atts.size(); j++) {
+        for (int i = 0; i < tsAttributes.size(); i++) {
+            for (int j = i + 1; j < tsAttributes.size(); j++) {
                 float p = StatLib.pearson(vals[i], vals[j]);//for the pearson
 
                 if (Math.abs(p) > 0.9) {//only if above o.
-                    Point ps[] = toPoints(ts.getAttributeData(atts.get(i)), ts.getAttributeData(atts.get(j)));
+                    Point ps[] = toPoints(ts.getAttributeData(tsAttributes.get(i)), ts.getAttributeData(tsAttributes.get(j)));
                     Line lin_reg = StatLib.linear_reg(ps);
                     float threshold = findThreshold(ps, lin_reg) * 1.1f; // 10% increase
-                    CorrelatedFeatures c = new CorrelatedFeatures(atts.get(i), atts.get(j), p, lin_reg, threshold);
-                    cf.add(c);
+                    CorrelatedFeatures c = new CorrelatedFeatures(tsAttributes.get(i), tsAttributes.get(j), p, lin_reg, threshold);
+                    correlatedFeatures.add(c);
                 }
             }
         }
@@ -164,7 +163,7 @@ public class TimeSeries {
         return max;
     }
     public String getCorrelateFeature(String attribute1) {
-        for (CorrelatedFeatures c : cf) {
+        for (CorrelatedFeatures c : correlatedFeatures) {
             if (c.feature1.equals(attribute1))
                 return c.feature2;
         }

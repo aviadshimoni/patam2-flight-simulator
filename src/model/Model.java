@@ -280,6 +280,7 @@ public class Model extends Observable implements SimulatorModel {
         fc.setTitle("open XML file");
         fc.setInitialDirectory(new File("./"));
         File chosen = fc.showOpenDialog(null);
+        String absolutePath = chosen.getAbsolutePath();
 
         if(chosen == null) {
             fileNotFoundAlert("XML");
@@ -289,7 +290,7 @@ public class Model extends Observable implements SimulatorModel {
                 wrongFileAlert("XML");
             } else {
                 try {
-                    this.properties = readFromXML(chosen.getName());
+                    this.properties = readFromXML(absolutePath);
                     if (this.properties != null) {
                         createMapAttribute();
                         return true;
@@ -349,6 +350,7 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     public FlightSetting readFromXML(String fileName) throws IOException {
+        System.out.println(fileName);
         FileInputStream fis = new FileInputStream(fileName);
         XMLDecoder decoder = new XMLDecoder(fis);
         FlightSetting decodedSettings = (FlightSetting) decoder.readObject();
