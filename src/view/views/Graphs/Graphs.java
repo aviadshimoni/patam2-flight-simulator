@@ -11,7 +11,7 @@ public class Graphs extends AnchorPane {
     public StringProperty selectedAttribute, correlatedAttribute;
     public DoubleProperty value, valueCorrelate,timeStamp, graphSpeed;
 
-    public IntegerProperty sizeTS;
+    public IntegerProperty sizeTimeSeries;
 
     GraphsController graphsController;
 
@@ -25,7 +25,7 @@ public class Graphs extends AnchorPane {
         valueCorrelate = new SimpleDoubleProperty();
         graphSpeed = new SimpleDoubleProperty();
         timeStamp = new SimpleDoubleProperty();
-        sizeTS = new SimpleIntegerProperty();
+        sizeTimeSeries = new SimpleIntegerProperty();
 
         try {
             AnchorPane graphAP = loader.load();

@@ -24,7 +24,7 @@ public class ViewModelController extends Observable implements Observer {
     public DoubleProperty throttle, rudder, aileron, elevators;
     public DoubleProperty sliderTime, choiceSpeed;
     public DoubleProperty pitch, pitchMax, pitchMin, roll, rollMax, rollMin, yaw, yawMax, yawMin;
-    public StringProperty altimeter, airSpeed, fd;
+    public StringProperty altimeter, airSpeed, flightDirection;
     public DoubleProperty valueAxis, valueCorrelate;
     public StringProperty timeFlight, chosenAttribute, correlateFeature;
     public IntegerProperty sizeTimeSeries;
@@ -67,7 +67,7 @@ public class ViewModelController extends Observable implements Observer {
         yawMin = new SimpleDoubleProperty();
         altimeter = new SimpleStringProperty();
         airSpeed = new SimpleStringProperty();
-        fd = new SimpleStringProperty();
+        flightDirection = new SimpleStringProperty();
 
         // Graphs:
         valueAxis = new SimpleDoubleProperty();
@@ -118,7 +118,7 @@ public class ViewModelController extends Observable implements Observer {
         throttle.setValue(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("throttle").associativeName, time));
         altimeter.setValue(String.valueOf(df.format(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("altimeter").associativeName, time))));
         airSpeed.setValue(String.valueOf(df.format(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("airSpeed").associativeName, time))));
-        fd.setValue(String.valueOf(df.format(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("fd").associativeName, time))));
+        flightDirection.setValue(String.valueOf(df.format(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("fd").associativeName, time))));
         pitch.setValue(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("pitch").associativeName, time));
         roll.setValue(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("roll").associativeName, time));
         yaw.setValue(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("yaw").associativeName, time));
@@ -189,7 +189,7 @@ public class ViewModelController extends Observable implements Observer {
                 sizeTimeSeries.setValue(timeSeriesAnomaly.getSize());
                 altimeter.setValue("0");
                 airSpeed.setValue("0");
-                fd.setValue("0");
+                flightDirection.setValue("0");
 
                 model.fileUpdateAlert("Test");
                 this.csvTestFile = true;

@@ -102,21 +102,21 @@ public class hybridAlgorithm {
         int indexZS = 0;
 
         for (String att : attALG.keySet()) {
-            Integer index1 = ts.atts.indexOf(att);
+            Integer index1 = ts.attributes.indexOf(att);
 
             if (attALG.get(att).nameALG.equals("Regression")) {
                 String att2 = attALG.get(att).feature2;
-                tsReg.ts.put(att, ts.ts.get(att));
-                tsReg.tsNum.put(indexReg++, ts.tsNum.get(index1));
-                Integer index2 = ts.atts.indexOf(att2);
-                tsReg.ts.put(att2, ts.ts.get(att));
-                tsReg.tsNum.put(indexReg++, ts.tsNum.get(index2));
-                tsReg.atts.add(att);
-                tsReg.atts.add(att2);
+                tsReg.timeSeries.put(att, ts.timeSeries.get(att));
+                tsReg.timeSeriesNumber.put(indexReg++, ts.timeSeriesNumber.get(index1));
+                Integer index2 = ts.attributes.indexOf(att2);
+                tsReg.timeSeries.put(att2, ts.timeSeries.get(att));
+                tsReg.timeSeriesNumber.put(indexReg++, ts.timeSeriesNumber.get(index2));
+                tsReg.attributes.add(att);
+                tsReg.attributes.add(att2);
             } else if (attALG.get(att).nameALG.equals("ZScore")) {
-                tsZscore.ts.put(att, ts.ts.get(att));
-                tsZscore.tsNum.put(indexZS++, ts.tsNum.get(index1));
-                tsZscore.atts.add(att);
+                tsZscore.timeSeries.put(att, ts.timeSeries.get(att));
+                tsZscore.timeSeriesNumber.put(indexZS++, ts.timeSeriesNumber.get(index1));
+                tsZscore.attributes.add(att);
             }
         }
 
@@ -212,33 +212,33 @@ public class hybridAlgorithm {
         int indexWZ = 0;
 
         for (String att : attALG.keySet()) {
-            Integer index1 = ts.atts.indexOf(att);
+            Integer index1 = ts.attributes.indexOf(att);
 
             if (attALG.get(att).nameALG.equals("Regression")) {
                 String att2 = attALG.get(att).feature2;
-                tsRegAnomal.ts.put(att, ts.ts.get(att));
+                tsRegAnomal.timeSeries.put(att, ts.timeSeries.get(att));
                 //Integer index1 = ts.atts.indexOf(att);
-                tsRegAnomal.tsNum.put(indexReg++, ts.tsNum.get(index1));
-                Integer index2 = ts.atts.indexOf(att2);
-                tsRegAnomal.ts.put(att2, ts.ts.get(att));
-                tsRegAnomal.tsNum.put(indexReg++, ts.tsNum.get(index2));
+                tsRegAnomal.timeSeriesNumber.put(indexReg++, ts.timeSeriesNumber.get(index1));
+                Integer index2 = ts.attributes.indexOf(att2);
+                tsRegAnomal.timeSeries.put(att2, ts.timeSeries.get(att));
+                tsRegAnomal.timeSeriesNumber.put(indexReg++, ts.timeSeriesNumber.get(index2));
 
-                tsRegAnomal.atts.add(att);
-                tsRegAnomal.atts.add(att2);
+                tsRegAnomal.attributes.add(att);
+                tsRegAnomal.attributes.add(att2);
             } else if (attALG.get(att).nameALG.equals("ZScore")) {
-                tsZscoreAnomal.ts.put(att, ts.ts.get(att));
-                tsZscoreAnomal.tsNum.put(indexZS++, ts.tsNum.get(index1));
-                tsZscoreAnomal.atts.add(att);
+                tsZscoreAnomal.timeSeries.put(att, ts.timeSeries.get(att));
+                tsZscoreAnomal.timeSeriesNumber.put(indexZS++, ts.timeSeriesNumber.get(index1));
+                tsZscoreAnomal.attributes.add(att);
             } else if (attALG.get(att).nameALG.equals("Welzl")) {
                 String att2 = attALG.get(att).feature2;
-                tsWezleAnomal.ts.put(att, ts.ts.get(att));
-                tsWezleAnomal.tsNum.put(indexWZ++, ts.tsNum.get(index1));
-                Integer index2 = ts.atts.indexOf(att2);
-                tsWezleAnomal.ts.put(att2, ts.ts.get(att));
-                tsWezleAnomal.tsNum.put(indexWZ++, ts.tsNum.get(index2));
+                tsWezleAnomal.timeSeries.put(att, ts.timeSeries.get(att));
+                tsWezleAnomal.timeSeriesNumber.put(indexWZ++, ts.timeSeriesNumber.get(index1));
+                Integer index2 = ts.attributes.indexOf(att2);
+                tsWezleAnomal.timeSeries.put(att2, ts.timeSeries.get(att));
+                tsWezleAnomal.timeSeriesNumber.put(indexWZ++, ts.timeSeriesNumber.get(index2));
 
-                tsWezleAnomal.atts.add(att);
-                tsWezleAnomal.atts.add(att2);
+                tsWezleAnomal.attributes.add(att);
+                tsWezleAnomal.attributes.add(att2);
             }
         }
 
@@ -425,9 +425,9 @@ public class hybridAlgorithm {
                                 lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), ZScoreReg.get(attribute1.getValue().toString()).get(timeStep.intValue())));
                             } else {
                                 if (ZScoreAnomaly.get(attribute1.getValue()).contains(timeStep.intValue()))//if we are at att with anomal and there is anomal in the present time
-                                    line.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.ts.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                                    line.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.timeSeries.get(attribute1.getValue().toString()).get(timeStep.intValue())));
                                 else
-                                    lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.ts.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                                    lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.timeSeries.get(attribute1.getValue().toString()).get(timeStep.intValue())));
                             }
                         });
 

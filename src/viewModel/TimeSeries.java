@@ -19,45 +19,45 @@ public class TimeSeries {
 
     public ArrayList<CorrelatedFeatures> cf;
 
-    public Map<String, ArrayList<Float>> ts;
-    public Map<Integer, ArrayList<Float>> tsNum;
+    public Map<String, ArrayList<Float>> timeSeries;
+    public Map<Integer, ArrayList<Float>> timeSeriesNumber;
     public ArrayList<String> rows;
-    public ArrayList<String> atts;
+    public ArrayList<String> attributes;
     int dataRowSize;
 
     public TimeSeries(){
-        this.ts = new HashMap<>();
-        this.tsNum = new HashMap<>();
+        this.timeSeries = new HashMap<>();
+        this.timeSeriesNumber = new HashMap<>();
         this.rows = new ArrayList<>();
-        this.atts = new ArrayList<>();
+        this.attributes = new ArrayList<>();
         this.dataRowSize = 0;
     }
 
     public TimeSeries(String csvFileName) {
-        ts = new HashMap<>();
-        tsNum = new HashMap<>();
+        timeSeries = new HashMap<>();
+        timeSeriesNumber = new HashMap<>();
         rows = new ArrayList<>();
 
-        atts = new ArrayList<>();
+        attributes = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(csvFileName));
             String line = in.readLine();
             int j = 0;
             for (String att : line.split(",")) {
-                atts.add(att);
-                ts.put(att, new ArrayList<>());
-                tsNum.put(j++, new ArrayList<>());
+                attributes.add(att);
+                timeSeries.put(att, new ArrayList<>());
+                timeSeriesNumber.put(j++, new ArrayList<>());
             }
             while ((line = in.readLine()) != null) {
                 int i = 0;
                 for (String val : line.split(",")) {
-                    ts.get(atts.get(i)).add(Float.parseFloat(val));
-                    tsNum.get(i).add(Float.parseFloat(val));
+                    timeSeries.get(attributes.get(i)).add(Float.parseFloat(val));
+                    timeSeriesNumber.get(i).add(Float.parseFloat(val));
                     i++;
                 }
                 rows.add(line);
             }
-            dataRowSize = ts.get(atts.get(0)).size();
+            dataRowSize = timeSeries.get(attributes.get(0)).size();
 
             in.close();
         } catch (IOException e) {
@@ -65,11 +65,11 @@ public class TimeSeries {
     }
 
     public ArrayList<Float> getAttributeData(String name) {
-        return ts.get(name);
+        return timeSeries.get(name);
     }
 
     public ArrayList<String> getAttributes() {
-        return atts;
+        return attributes;
     }
 
     public int getSize() {// they both doing the exact same thing, but cuz we mixed code we need to change the name we call that function
@@ -82,19 +82,18 @@ public class TimeSeries {
 
     public float getValueByTime(int index, int time) {
 
-        float f = tsNum.get(index).get(time);
-        return tsNum.get(index).get(time);
+        float f = timeSeriesNumber.get(index).get(time);
+        return timeSeriesNumber.get(index).get(time);
     }
 
     public float getValueByTime(String index, int time) {
-
-        return ts.get(index).get(time);
+        return timeSeries.get(index).get(time);
     }
 
     public float getMinFromAttribute(String val) {
-        ArrayList<Float> lst = ts.get(val);
+        ArrayList<Float> lst = timeSeries.get(val);
 
-        float minVal = ts.get(val).get(0);//get the val of the first timeStep
+        float minVal = timeSeries.get(val).get(0);//get the val of the first timeStep
 
         for (float f : lst) {
             if ((f < minVal))
@@ -104,7 +103,7 @@ public class TimeSeries {
     }
 
     public float getMaxFromAttribute(String val) {
-        ArrayList<Float> lst = ts.get(val);
+        ArrayList<Float> lst = timeSeries.get(val);
         float maxVal = 0;
         for (float f : lst) {
             if (f > maxVal)
@@ -115,7 +114,7 @@ public class TimeSeries {
 
     public ListProperty<Float> getDataOfAttUntilIndex(String s, int index){
         ListProperty<Float>dataUntilIndex= new SimpleListProperty<>();
-        List<Float>lst= ts.get(s).subList(0,index);
+        List<Float>lst= timeSeries.get(s).subList(0,index);
         dataUntilIndex.addAll(lst);
         return  dataUntilIndex;
     }
@@ -123,7 +122,7 @@ public class TimeSeries {
     public void checkCorrelate(TimeSeries ts) {
         cf = new ArrayList<>();
         ArrayList<String> atts = ts.getAttributes();
-        int len = ts.ts.get(ts.atts.get(0)).size();
+        int len = ts.timeSeries.get(ts.attributes.get(0)).size();
 
         float vals[][] = new float[atts.size()][len];
         for (int i = 0; i < atts.size(); i++) {

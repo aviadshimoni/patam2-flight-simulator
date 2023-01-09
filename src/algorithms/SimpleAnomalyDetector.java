@@ -58,7 +58,7 @@ public class SimpleAnomalyDetector implements AnomalyDetector {
     public void learnNormal(TimeSeries ts) {
         tsReg = ts;
         ArrayList<String> atts = ts.getAttributes();
-        int len = ts.ts.get(ts.atts.get(0)).size();
+        int len = ts.timeSeries.get(ts.attributes.get(0)).size();
 
         float vals[][] = new float[atts.size()][len];
         for (int i = 0; i < atts.size(); i++) {

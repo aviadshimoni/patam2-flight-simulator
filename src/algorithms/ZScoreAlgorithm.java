@@ -101,11 +101,11 @@ public class ZScoreAlgorithm implements AnomalyDetector {
 
         ArrayList<Float> zScored = new ArrayList<>();
         String attribute;
-        int colSize = ts.atts.size();
+        int colSize = ts.attributes.size();
 
         for (int i = 0; i < colSize; i++) {
-            ArrayList<Float> col = ts.tsNum.get(i);
-            attribute = ts.atts.get(index);
+            ArrayList<Float> col = ts.timeSeriesNumber.get(i);
+            attribute = ts.attributes.get(index);
             avgMap.put(attribute, new ArrayList<>());
 
             for (int j = 0; j < col.size(); j++) {
@@ -122,9 +122,9 @@ public class ZScoreAlgorithm implements AnomalyDetector {
         List<AnomalyReport> lst = new LinkedList<>();
         String attribute;
 
-        for (int indexCol = 0; indexCol < data.atts.size(); indexCol++) {
-            ArrayList<Float> col = data.tsNum.get(indexCol);
-            attribute = data.atts.get(indexCol);
+        for (int indexCol = 0; indexCol < data.attributes.size(); indexCol++) {
+            ArrayList<Float> col = data.timeSeriesNumber.get(indexCol);
+            attribute = data.attributes.get(indexCol);
             for (int indexTime = 0; indexTime < col.size(); indexTime++) {
                 if (calcZScore(col.subList(0, indexTime)) > tx.get(indexCol)) {
                     lst.add(new AnomalyReport(attribute, indexTime));

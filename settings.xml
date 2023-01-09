@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="19.0.1" class="java.beans.XMLDecoder">
+ <object class="model.FlightSetting">
+  <void property="attributes">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="model.Attribute" id="Attribute0">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute0"/>
+        <string>aileron</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute0"/>
+        <int>0</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute0"/>
+        <int>-1</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute0"/>
+        <int>1</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute1">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute1"/>
+        <string>elevators</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute1"/>
+        <int>1</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute1"/>
+        <int>-1</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute1"/>
+        <int>1</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute2">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute2"/>
+        <string>rudder</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute2"/>
+        <int>2</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute2"/>
+        <int>0</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute2"/>
+        <int>1</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute3">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute3"/>
+        <string>throttle</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute3"/>
+        <int>6</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute3"/>
+        <int>0</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute3"/>
+        <int>1</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute4">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute4"/>
+        <string>altimeter</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute4"/>
+        <int>25</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute5">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute5"/>
+        <string>airSpeed</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute5"/>
+        <int>24</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute6">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute6"/>
+        <string>fd</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute6"/>
+        <int>36</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute6"/>
+        <int>0</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute6"/>
+        <int>360</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute7">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute7"/>
+        <string>pitch</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute7"/>
+        <int>29</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute7"/>
+        <int>-10</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute7"/>
+        <int>17</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute8">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute8"/>
+        <string>roll</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute8"/>
+        <int>17</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute8"/>
+        <int>-38</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute8"/>
+        <int>43</int>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="model.Attribute" id="Attribute9">
+      <void class="model.Attribute" method="getField">
+       <string>name</string>
+       <void method="set">
+        <object idref="Attribute9"/>
+        <string>yaw</string>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>associativeName</string>
+       <void method="set">
+        <object idref="Attribute9"/>
+        <int>20</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>min</string>
+       <void method="set">
+        <object idref="Attribute9"/>
+        <int>-29</int>
+       </void>
+      </void>
+      <void class="model.Attribute" method="getField">
+       <string>max</string>
+       <void method="set">
+        <object idref="Attribute9"/>
+        <int>91</int>
+       </void>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="ip">
+   <string>127.0.0.1</string>
+  </void>
+  <void property="playSpeed">
+   <int>100</int>
+  </void>
+  <void property="port">
+   <double>5402.0</double>
+  </void>
+ </object>
+</java>
