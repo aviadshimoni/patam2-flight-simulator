@@ -121,25 +121,25 @@ public class TimeSeries {
 
     public void checkCorrelate(TimeSeries ts) {
         correlatedFeatures = new ArrayList<>();
-        ArrayList<String> tsAttributes = ts.getAttributes();
+        ArrayList<String> timeSeriesAttributes = ts.getAttributes();
         int len = ts.timeSeries.get(ts.attributes.get(0)).size();
 
-        float vals[][] = new float[tsAttributes.size()][len];
-        for (int i = 0; i < tsAttributes.size() ; i++) {
+        float vals[][] = new float[timeSeriesAttributes.size()][len];
+        for (int i = 0; i < timeSeriesAttributes.size() ; i++) {
             for (int j = 0; j < len ; j++) {
-                vals[i][j] = ts.getValueByTime(tsAttributes.get(i),j);
+                vals[i][j] = ts.getValueByTime(timeSeriesAttributes.get(i),j);
             }
         }
 
-        for (int i = 0; i < tsAttributes.size(); i++) {
-            for (int j = i + 1; j < tsAttributes.size(); j++) {
+        for (int i = 0; i < timeSeriesAttributes.size(); i++) {
+            for (int j = i + 1; j < timeSeriesAttributes.size(); j++) {
                 float p = StatLib.pearson(vals[i], vals[j]);//for the pearson
 
                 if (Math.abs(p) > 0.9) {//only if above o.
-                    Point ps[] = toPoints(ts.getAttributeData(tsAttributes.get(i)), ts.getAttributeData(tsAttributes.get(j)));
+                    Point ps[] = toPoints(ts.getAttributeData(timeSeriesAttributes.get(i)), ts.getAttributeData(timeSeriesAttributes.get(j)));
                     Line lin_reg = StatLib.linear_reg(ps);
                     float threshold = findThreshold(ps, lin_reg) * 1.1f; // 10% increase
-                    CorrelatedFeatures c = new CorrelatedFeatures(tsAttributes.get(i), tsAttributes.get(j), p, lin_reg, threshold);
+                    CorrelatedFeatures c = new CorrelatedFeatures(timeSeriesAttributes.get(i), timeSeriesAttributes.get(j), p, lin_reg, threshold);
                     correlatedFeatures.add(c);
                 }
             }
