@@ -42,7 +42,7 @@ public class GraphsController {
         XYChart.Series series2 = new XYChart.Series();
         mostCorrelatedAttribute.getData().add(series2);
         series2.getNode().setStyle("-fx-stroke: black;");
-        selectedAttribute.addListener((ob, oldval, newVal) -> {
+        selectedAttribute.addListener((ob, oldVal, newVal) -> {
 
             timeStamp.addListener((o, ov, nv) -> {
                 Platform.runLater(() -> {
@@ -58,7 +58,7 @@ public class GraphsController {
                 }
             });
 
-            if ((newVal != null) && (!newVal.equals(oldval))) {     //if change the attribute
+            if ((newVal != null) && (!newVal.equals(oldVal))) {     //if change the attribute
                 series1.getData().clear();
                 series2.getData().clear();
             }

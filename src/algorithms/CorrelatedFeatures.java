@@ -2,15 +2,15 @@ package algorithms;
 
 public class CorrelatedFeatures {
 	public  String feature1, feature2;
-	public  float corrlation;
-	public  Line lin_reg;
+	public  float correlation;
+	public  Line linearRegression;
 	public  float threshold;
 	
-	public CorrelatedFeatures(String feature1, String feature2, float corrlation, Line lin_reg, float threshold) {
+	public CorrelatedFeatures(String feature1, String feature2, float correlation, Line linearReg, float threshold) {
 		this.feature1 = feature1;
 		this.feature2 = feature2;
-		this.corrlation = corrlation;
-		this.lin_reg = lin_reg;
+		this.correlation = correlation;
+		this.linearRegression = linearReg;
 		this.threshold = threshold;
 	}
 }

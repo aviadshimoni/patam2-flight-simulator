@@ -81,8 +81,6 @@ public class TimeSeries {
     }
 
     public float getValueByTime(int index, int time) {
-
-        float f = timeSeriesNumber.get(index).get(time);
         return timeSeriesNumber.get(index).get(time);
     }
 
