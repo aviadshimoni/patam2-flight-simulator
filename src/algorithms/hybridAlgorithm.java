@@ -282,7 +282,7 @@ public class hybridAlgorithm {
     }
 
     public void initDataForGraphAttChange() {
-        regLineForCorrelateAttribute = cfmore95.get(attribute1.getValue()).lin_reg;
+        regLineForCorrelateAttribute = cfmore95.get(attribute1.getValue()).linearRegression;
         valAtt1X.setValue(tsReg.getMinFromAttribute(attribute1.getValue()));
         valAtt2Y.setValue(regLineForCorrelateAttribute.f(valAtt1X.floatValue()));
         vaAtt1Xend.setValue(tsReg.getMaxFromAttribute(attribute2.getValue()));

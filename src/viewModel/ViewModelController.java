@@ -164,7 +164,7 @@ public class ViewModelController extends Observable implements Observer {
                 timeSeriesRegression = new TimeSeries(chosen.getPath());
                 timeSeriesRegression.checkCorrelate(timeSeriesRegression);
                 model.setTimeSeries(timeSeriesRegression, "Train");   // Set timeSeries
-                this.csvTrainFile = true;
+                csvTrainFile = true;
                 model.fileUpdateAlert("Train");
             }
         }

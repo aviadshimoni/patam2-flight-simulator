@@ -108,7 +108,7 @@ public class SimpleAnomalyDetector implements AnomalyDetector {
             ArrayList<Float> x = ts.getAttributeData(c.feature1);
             ArrayList<Float> y = ts.getAttributeData(c.feature2);
             for (int i = 0; i < x.size(); i++) {
-                if (Math.abs(y.get(i) - c.lin_reg.f(x.get(i))) > c.threshold) {
+                if (Math.abs(y.get(i) - c.linearRegression.f(x.get(i))) > c.threshold) {
                     String d = c.feature1 + "-" + c.feature2;
                     v.add(new AnomalyReport(d, (i + 1)));
                     if (!anomalyAndTimeStep.containsKey(c.feature1)) {
@@ -204,7 +204,7 @@ public class SimpleAnomalyDetector implements AnomalyDetector {
     public Line getRegLine(String f1, String f2) {
         for (CorrelatedFeatures c : cf) {
             if (c.feature1.equals(f1) && c.feature2.equals(f2))
-                return c.lin_reg;
+                return c.linearRegression;
         }
         return null;
     }
