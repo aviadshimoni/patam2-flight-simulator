@@ -58,60 +58,33 @@ public class PlayerButtonsController {
     }
 
     public void onOpenCSVTrain() {
-        if(onOpenCSVTrain.getValue())
-            onOpenCSVTrain.setValue(false);
-        else
-            onOpenCSVTrain.setValue(true);
+        onOpenCSVTrain.setValue(!onOpenCSVTrain.getValue());
     }
 
     public void onOpenCSVTest() {
-        if(onOpenCSVTest.getValue())
-            onOpenCSVTest.setValue(false);
-        else
-            onOpenCSVTest.setValue(true);
+        onOpenCSVTest.setValue(!onOpenCSVTest.getValue());
     }
 
     public void onOpenXML() {
-        if(onOpenXML.getValue())
-            onOpenXML.setValue(false);
-        else
-            onOpenXML.setValue(true);
+        onOpenXML.setValue(!onOpenXML.getValue());
     }
     public void onAnomalyDetector(){
-        if(onAnomalyDetector.getValue())
-            onAnomalyDetector.setValue(false);
-        else
-            onAnomalyDetector.setValue(true);
+        onAnomalyDetector.setValue(!onAnomalyDetector.getValue());
     }
 
     public void onRewind() {
-        if(onRewind.getValue())
-            onRewind.setValue(false);
-        else
-            onRewind.setValue(true);
+        onRewind.setValue(!onRewind.getValue());
     }
     public void onPlay() {
-        if(onPlay.getValue())
-            onPlay.setValue(false);
-        else
-            onPlay.setValue(true);
+        onPlay.setValue(!onPlay.getValue());
     }
     public void onPause() {
-        if(onPause.getValue())
-            onPause.setValue(false);
-        else
-            onPause.setValue(true);
+        onPause.setValue(!onPause.getValue());
     }
     public void onStop() {
-        if(onStop.getValue())
-            onStop.setValue(false);
-        else
-            onStop.setValue(true);
+        onStop.setValue(!onStop.getValue());
     }
     public void onForward() {
-        if(onForward.getValue())
-            onForward.setValue(false);
-        else
-            onForward.setValue(true);
+        onForward.setValue(!onForward.getValue());
     }
 }

@@ -112,7 +112,7 @@ public class TimeSeries {
         ArrayList<String> timeSeriesAttributes = ts.getAttributes();
         int len = ts.timeSeries.get(ts.attributes.get(0)).size();
 
-        float vals[][] = new float[timeSeriesAttributes.size()][len];
+        float[][] vals = new float[timeSeriesAttributes.size()][len];
         for (int i = 0; i < timeSeriesAttributes.size() ; i++) {
             for (int j = 0; j < len ; j++) {
                 vals[i][j] = ts.getValueByTime(timeSeriesAttributes.get(i),j);
@@ -124,7 +124,7 @@ public class TimeSeries {
                 float p = StatLib.pearson(vals[i], vals[j]);//for the pearson
 
                 if (Math.abs(p) > 0.9) {//only if above o.
-                    Point ps[] = toPoints(ts.getAttributeData(timeSeriesAttributes.get(i)), ts.getAttributeData(timeSeriesAttributes.get(j)));
+                    Point[] ps = toPoints(ts.getAttributeData(timeSeriesAttributes.get(i)), ts.getAttributeData(timeSeriesAttributes.get(j)));
                     Line lin_reg = StatLib.linear_reg(ps);
                     float threshold = findThreshold(ps, lin_reg) * 1.1f; // 10% increase
                     CorrelatedFeatures c = new CorrelatedFeatures(timeSeriesAttributes.get(i), timeSeriesAttributes.get(j), p, lin_reg, threshold);
@@ -141,7 +141,7 @@ public class TimeSeries {
         return ps;
     }
 
-    private float findThreshold(Point ps[], Line rl) {
+    private float findThreshold(Point[] ps, Line rl) {
         float max = 0;
         for (int i = 0; i < ps.length; i++) {
             float d = Math.abs(ps[i].y - rl.f(ps[i].x));

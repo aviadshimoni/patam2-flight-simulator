@@ -42,8 +42,8 @@ public class StatLib {
 
     // performs a linear regression and returns the line equation
     public static Line linear_reg(Point[] points){
-        float x[]=new float[points.length];
-        float y[]=new float[points.length];
+        float[] x =new float[points.length];
+        float[] y =new float[points.length];
         for(int i=0;i<points.length;i++){
             x[i]=points[i].x;
             y[i]=points[i].y;

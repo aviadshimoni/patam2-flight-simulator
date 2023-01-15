@@ -263,7 +263,7 @@ public class ViewModelController extends Observable implements Observer {
                 return false;
             }
             try {
-                model.loadAnomalyDetector(chosen.getPath(),chosen.getName().toString());
+                model.loadAnomalyDetector(chosen.getPath(), chosen.getName());
             } catch (Exception e) {
                 e.printStackTrace();
             }

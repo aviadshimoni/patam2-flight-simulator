@@ -77,15 +77,6 @@ public class ZScoreAlgorithm implements AnomalyDetector {
     }
 
 
-    public float argMax(LinkedList<Float> z) {
-        float max = 0;
-        for (int i = 0; i < z.size(); i++) {
-            if (max < z.get(i))
-                max = z.get(i);
-        }
-        return max;
-    }
-
     public float argMax(ArrayList<Float> z) {
         float max = 0;
         for (int i = 0; i < z.size(); i++) {

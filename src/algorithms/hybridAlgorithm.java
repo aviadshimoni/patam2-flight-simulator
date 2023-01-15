@@ -135,7 +135,7 @@ public class hybridAlgorithm {
         ArrayList<String> atts = ts.getAttributes();
         int len = ts.getRowSize();
 
-        float vals[][] = new float[atts.size()][len];
+        float[][] vals = new float[atts.size()][len];
 
         for (int i = 0; i < atts.size(); i++) {
             for (int j = 0; j < ts.getRowSize(); j++) {
@@ -149,7 +149,7 @@ public class hybridAlgorithm {
                 float threshold;
                 if (Math.abs(p) >= 0.95) {
 
-                    Point ps[] = toPoints(ts.getAttributeData(atts.get(i)), ts.getAttributeData(atts.get(j)));
+                    Point[] ps = toPoints(ts.getAttributeData(atts.get(i)), ts.getAttributeData(atts.get(j)));
                     Line lin_reg = StatLib.linear_reg(ps);
                     threshold = findThreshold(ps, lin_reg) * 1.1f; // 10% increase
                     CorrelatedFeatures c = new CorrelatedFeatures(atts.get(i), atts.get(j), p, lin_reg, threshold);//att1_att2_pearsonCorrelate_null_threshold(the max one)
@@ -195,7 +195,7 @@ public class hybridAlgorithm {
         }
     }
 
-    private float findThreshold(Point ps[], Line rl) {  // To find Anomal
+    private float findThreshold(Point[] ps, Line rl) {  // To find Anomal
         float max = 0;
         for (int i = 0; i < ps.length; i++) {
             float d = Math.abs(ps[i].y - rl.f(ps[i].x));
@@ -353,7 +353,7 @@ public class hybridAlgorithm {
 
                 timeStep.addListener((o, ov, nv) -> {
                     initDataForGraphTimeChange();
-                    if (attALG.get(attribute1.getValue().toString()).nameALG.equals("Welzl")) {
+                    if (attALG.get(attribute1.getValue()).nameALG.equals("Welzl")) {
                         sc.setVisible(false);
                         regBoard.setVisible(false);
                         circleGraph.setVisible(true);
@@ -384,7 +384,7 @@ public class hybridAlgorithm {
                         });
 
 
-                    } else if (attALG.get(attribute1.getValue().toString()).nameALG.equals("Regression")) {
+                    } else if (attALG.get(attribute1.getValue()).nameALG.equals("Regression")) {
                         sc.setVisible(false);
                         circleGraph.setVisible(false);
                         regBoard.setVisible(true);
@@ -411,7 +411,7 @@ public class hybridAlgorithm {
                             }
                         });
 
-                    } else if (attALG.get(attribute1.getValue().toString()).nameALG.equals("ZScore")) {
+                    } else if (attALG.get(attribute1.getValue()).nameALG.equals("ZScore")) {
                         sc.setVisible(true);
                         regBoard.setVisible(false);
                         circleGraph.setVisible(false);
@@ -422,12 +422,12 @@ public class hybridAlgorithm {
 
                         Platform.runLater(() -> {
                             if (!ZScoreAnomaly.containsKey(attribute1.getValue())) {// i dont think it's work
-                                lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), ZScoreReg.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                                lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), ZScoreReg.get(attribute1.getValue()).get(timeStep.intValue())));
                             } else {
                                 if (ZScoreAnomaly.get(attribute1.getValue()).contains(timeStep.intValue()))//if we are at att with anomal and there is anomal in the present time
-                                    line.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.timeSeries.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                                    line.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.timeSeries.get(attribute1.getValue()).get(timeStep.intValue())));
                                 else
-                                    lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.timeSeries.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                                    lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), tsZscoreAnomal.timeSeries.get(attribute1.getValue()).get(timeStep.intValue())));
                             }
                         });
 
