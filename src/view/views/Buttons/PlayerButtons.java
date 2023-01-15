@@ -11,7 +11,6 @@ public class PlayerButtons extends AnchorPane {
     public  StringProperty timeFlight, milliSec, seconds, minutes;
     public BooleanProperty onOpenCSVTrain, onOpenCSVTest, onOpenXML, onPlay, onPause, onSpeed, onStop,
                            onRewind, onForward,onAnomalyDetector;
-
     public PlayerButtons() {
         super();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerButtons.fxml"));

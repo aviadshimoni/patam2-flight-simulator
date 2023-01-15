@@ -16,10 +16,10 @@
       <Button layoutX="8" layoutY="-470" mnemonicParsing="false" onAction="#onOpenCSVTrain" prefHeight="31" prefWidth="142"  text="Choose CSV Train" textAlignment="CENTER"></Button>
       <Button layoutX="120" layoutY="-435" mnemonicParsing="false" onAction="#onAnomalyDetector" prefHeight="31" prefWidth="181" text="Load Anomaly Detector" textFill="#000000"></Button>
       <Button layoutX="159" layoutY="-470" mnemonicParsing="false" onAction="#onOpenCSVTest" prefHeight="31" prefWidth="142" text="Choose CSV Test" textAlignment="CENTER" textFill="#000000"></Button>
-      <Button layoutX="59" layoutY="82" mnemonicParsing="false" onAction="#onPlay" prefHeight="35" prefWidth="40" text="▶️" textAlignment="CENTER" ></Button>
-      <Button layoutX="166" layoutY="82" mnemonicParsing="false" onAction="#onStop" prefHeight="35" prefWidth="40"
+      <Button fx:id="playBTN" disable="false" layoutX="59" layoutY="82" mnemonicParsing="false" onAction="#onPlay" prefHeight="35" prefWidth="40" text="▶️" textAlignment="CENTER" ></Button>
+      <Button fx:id="stopBTN" disable="true" layoutX="166" layoutY="82" mnemonicParsing="false" onAction="#onStop" prefHeight="35" prefWidth="40"
               text="⏹"/>
-      <Button layoutX="112" layoutY="82" mnemonicParsing="false" onAction="#onPause" prefHeight="35" prefWidth="40"
+      <Button fx:id="pauseBTN" disable="true" layoutX="112" layoutY="82" mnemonicParsing="false" onAction="#onPause" prefHeight="35" prefWidth="40"
               text="⏸"/>
       <Button layoutX="220" layoutY="82" mnemonicParsing="false" onAction="#onForward" prefHeight="35" prefWidth="40" text="⏩" ></Button>
       <Button layoutX="8" layoutY="82" mnemonicParsing="false" onAction="#onRewind" prefHeight="35" prefWidth="40" text="⏪" ></Button>

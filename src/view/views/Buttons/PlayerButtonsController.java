@@ -24,6 +24,9 @@ public class PlayerButtonsController {
     @FXML
     TextField minutes;
 
+    @FXML
+    Button playBTN, stopBTN ,pauseBTN;
+
     public BooleanProperty onOpenCSVTrain, onOpenCSVTest, onOpenXML, onPlay, onPause, onSpeed, onStop,
             onRewind, onForward, onAnomalyDetector;
 
@@ -77,14 +80,27 @@ public class PlayerButtonsController {
     }
     public void onPlay() {
         onPlay.setValue(!onPlay.getValue());
+        playBTN.setDisable(true);
+        pauseBTN.setDisable(false);
+        stopBTN.setDisable(false);
+
     }
     public void onPause() {
         onPause.setValue(!onPause.getValue());
+        disablePlayBTN();
     }
     public void onStop() {
         onStop.setValue(!onStop.getValue());
+        disablePlayBTN();
+
     }
     public void onForward() {
         onForward.setValue(!onForward.getValue());
+    }
+
+    public void disablePlayBTN(){
+        playBTN.setDisable(false);
+        pauseBTN.setDisable(true);
+        stopBTN.setDisable(true);
     }
 }

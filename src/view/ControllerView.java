@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import java.util.Observable;
 import java.util.Observer;
 
+import view.views.Buttons.PlayerButtonsController;
 import view.views.Graphs.Graphs;
 import view.views.Joystic.Joystick;
 import view.views.Gauges.Gauges;

@@ -63,7 +63,7 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     synchronized public void playFile() {
-        if (options.afterForward) {  //somehow it does not responded to it and cannot go back to normal rate
+        if (options.afterForward) {
             options.afterForward = false;
             properties.setPlaySpeed(100);
         } else if (options.afterRewind) {
@@ -197,6 +197,13 @@ public class Model extends Observable implements SimulatorModel {
         alert.showAndWait();
     }
 
+    public void brokenFileAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("The file you choose is broken");
+        alert.showAndWait();
+    }
+
     public void wrongFileAlert(String type) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -297,6 +304,9 @@ public class Model extends Observable implements SimulatorModel {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                catch (java.lang.ArrayIndexOutOfBoundsException e) {
+                    brokenFileAlert();
+                }
             }
         }
         return false;
@@ -349,6 +359,7 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     public FlightSetting readFromXML(String fileName) throws IOException {
+
         System.out.println(fileName);
         FileInputStream fis = new FileInputStream(fileName);
         XMLDecoder decoder = new XMLDecoder(fis);

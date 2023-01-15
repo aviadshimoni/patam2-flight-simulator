@@ -33,7 +33,7 @@ public class ViewModelController extends Observable implements Observer {
     public ObservableList<String> attributeList;
 
     public int numberOfCorrelateAttribute;
-    public Boolean xmlFile, csvTestFile, csvTrainFile, algoFile;
+    public Boolean xmlFile, csvTestFile, csvTrainFile, isAnomalyAlgorithmLoaded;
 
     public ViewModelController(Model model) {
         this.model = model;
@@ -43,7 +43,7 @@ public class ViewModelController extends Observable implements Observer {
         xmlFile = false;
         csvTestFile = false;
         csvTrainFile = false;
-        algoFile = false;
+        isAnomalyAlgorithmLoaded = false;
 
         timeStamp = new SimpleDoubleProperty();
         timeStampGraph = new SimpleDoubleProperty();
@@ -75,7 +75,6 @@ public class ViewModelController extends Observable implements Observer {
         valueCorrelate = new SimpleDoubleProperty();
         chosenAttribute = new SimpleStringProperty();
         correlateFeature = new SimpleStringProperty();
-        chosenAttribute.setValue("0");
         correlateFeature.setValue("0");
 
         timeFlight = new SimpleStringProperty();
@@ -96,19 +95,20 @@ public class ViewModelController extends Observable implements Observer {
 
         timeStamp.addListener((o, ov, nv) -> {
             updateDisplayVariables(nv.intValue());
-            if(algoFile == true)
+            if(isAnomalyAlgorithmLoaded == true)
                 model.bindAlgorithmToTimestep();     //updating the date for the alg graph
         });
 
         chosenAttribute.addListener((o, ov, nv) -> {
             model.attribute1.bind(chosenAttribute);
-            if(algoFile == true)
+            if(isAnomalyAlgorithmLoaded == true)
                 model.bindAlgorithmToTimestep();
         });
+
     }
 
     public void updateDisplayVariables(int time) {
-        DecimalFormat df = new DecimalFormat("0.0##");
+        DecimalFormat df = new DecimalFormat("0.0#");
         df.setRoundingMode(RoundingMode.DOWN);
 
         sliderTime.setValue(time);
@@ -124,12 +124,7 @@ public class ViewModelController extends Observable implements Observer {
         roll.setValue(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("roll").associativeName, time));
         yaw.setValue(timeSeriesAnomaly.getValueByTime(model.attributeMap.get("yaw").associativeName, time));
 
-        /*
-            To update the specific chosen attribute
-            getting the number of the chosen attribute
-            numberOfSpecAttribute = ts.getIndexOfAttribute(chosenAttribute.getValue());
-            updating by binding the value of the chosen attribute
-         */
+
         valueAxis.setValue(timeSeriesAnomaly.getValueByTime(chosenAttribute.getValue(), time));
 
         //  Init the name of the correlate attribute
@@ -267,7 +262,7 @@ public class ViewModelController extends Observable implements Observer {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            algoFile = true;
+            isAnomalyAlgorithmLoaded = true;
             model.fileUpdateAlert("Algorithm");
             return true;
         }

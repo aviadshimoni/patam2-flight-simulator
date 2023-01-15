@@ -7,6 +7,15 @@
   -fx-border-radius: 4px;
 }
 
+.button:disabled {
+  -fx-background-color: rgb(255, 0, 161); /* red */
+  -fx-text-fill: white;
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-padding: 4px 8px;
+  -fx-border-radius: 4px;
+}
+
 .button:hover {
   -fx-background-color: rgb(121, 4, 235); /* Purple light */
   -fx-cursor: hand;

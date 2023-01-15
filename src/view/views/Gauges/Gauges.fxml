@@ -9,18 +9,18 @@
 <?import javafx.scene.layout.VBox?>
 <AnchorPane prefHeight="260" prefWidth="497" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.views.Gauges.GaugesController" stylesheets="@Gauges.css,@../global/global.css">
    <children>
-      <VBox spacing="10" layoutY="150">
+      <VBox spacing="10" layoutY="130" layoutX="-60">
          <HBox styleClass="data-pane-border">
-            <Text styleClass="data-text" layoutX="7" text="Altimeter: "></Text>
-            <Text fx:id="altimeter" styleClass="data-text" layoutX="170" text="0" ></Text>
+            <Text styleClass="data-text" text="Altimeter: "></Text>
+            <Text fx:id="altimeter" styleClass="data-text" text="0" ></Text>
          </HBox>
          <HBox styleClass="data-pane-border">
-            <Text styleClass="data-text" layoutX="7"  text="AirSpeed: "></Text>
-            <Text fx:id="airSpeed" styleClass="data-text" layoutX="170"  text="0" ></Text>
+            <Text styleClass="data-text" text="AirSpeed: "></Text>
+            <Text fx:id="airSpeed" styleClass="data-text" text="0" ></Text>
          </HBox>
          <HBox styleClass="data-pane-border">
-            <Text styleClass="data-text" layoutX="7" text="Flight Direction:" ></Text>
-            <Text fx:id="flightDirection" styleClass="data-text" layoutX="170" text="0"></Text>
+            <Text styleClass="data-text" text="Flight Direction:" ></Text>
+            <Text fx:id="flightDirection" styleClass="data-text" text="0"></Text>
          </HBox>
       </VBox>
 

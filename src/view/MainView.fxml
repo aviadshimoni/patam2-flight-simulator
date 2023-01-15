@@ -15,6 +15,6 @@
       <PlayerButtons fx:id="playerButtons" layoutX="9" layoutY="500" />
       <Gauges fx:id="gauges" layoutX="600" layoutY="285"/>
       <Attributes fx:id="listView" layoutX="16" layoutY="100"/>
-      <AnchorPane fx:id="anchorPane" layoutX="250" layoutY="350"/>
+      <AnchorPane fx:id="anchorPane" layoutX="320" layoutY="250"/>
    </children>
 </Pane>
