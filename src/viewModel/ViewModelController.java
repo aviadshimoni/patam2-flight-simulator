@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import model.Model;
+import model.TimeSeries;
 
 import java.io.File;
 import java.math.RoundingMode;
@@ -143,8 +144,7 @@ public class ViewModelController extends Observable implements Observer {
         }
     }
     public StringProperty getCorrelateFeature(){
-        //  Init the name of the correlate attribute
-        correlateFeature.setValue(timeSeriesRegression.getCorrelateFeature(chosenAttribute.getValue()));  //need to be according to the ALG
+        correlateFeature.setValue(timeSeriesRegression.getCorrelateFeature(chosenAttribute.getValue()));
         return correlateFeature;
     }
 

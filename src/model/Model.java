@@ -10,7 +10,6 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import viewModel.TimeSeries;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;

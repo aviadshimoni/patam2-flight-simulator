@@ -1,18 +1,15 @@
-package viewModel;
+package model;
 
 import algorithms.CorrelatedFeatures;
 import algorithms.Line;
 import algorithms.Point;
 import algorithms.StatLib;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TimeSeries {
@@ -108,13 +105,6 @@ public class TimeSeries {
                 maxVal = f;
         }
         return maxVal;
-    }
-
-    public ListProperty<Float> getDataOfAttUntilIndex(String s, int index){
-        ListProperty<Float>dataUntilIndex= new SimpleListProperty<>();
-        List<Float>lst= timeSeries.get(s).subList(0,index);
-        dataUntilIndex.addAll(lst);
-        return  dataUntilIndex;
     }
 
     public void checkCorrelate(TimeSeries ts) {

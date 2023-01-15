@@ -12,7 +12,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 
-import viewModel.TimeSeries;
+import model.TimeSeries;
 
 import java.util.ArrayList;
 import java.util.HashMap;

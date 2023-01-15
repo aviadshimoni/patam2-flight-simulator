@@ -9,7 +9,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
-import viewModel.TimeSeries;
+import model.TimeSeries;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class ZScoreAlgorithm implements AnomalyDetector {
     Vector<Float> tx;
 
     public HashMap<Integer, ArrayList<Float>> ZScoreMap;
-    public HashMap<String, ArrayList<Float>> ZScoreReg;
+    public HashMap<String, ArrayList<Float>> zScoreRegression;
     public HashMap<String, ArrayList<Integer>> ZScoreAnomaly;
 
     public HashMap<String, ArrayList<Float>> avgMap;
@@ -30,7 +30,7 @@ public class ZScoreAlgorithm implements AnomalyDetector {
         this.tx = new Vector<>();
         this.ZScoreMap = new HashMap<>();
         this.avgMap = new HashMap<>();
-        this.ZScoreReg = new HashMap<>();
+        this.zScoreRegression = new HashMap<>();
         this.ZScoreAnomaly = new HashMap<>();
     }
 
@@ -113,7 +113,7 @@ public class ZScoreAlgorithm implements AnomalyDetector {
                 zScored.add(calcZScore(col.subList(0, j)));
             }
             tx.add(argMax(zScored));
-            this.ZScoreReg.put(attribute, zScored);
+            this.zScoreRegression.put(attribute, zScored);
             this.ZScoreMap.put(index++, zScored);
         }
     }
@@ -145,29 +145,29 @@ public class ZScoreAlgorithm implements AnomalyDetector {
         AnchorPane ap = new AnchorPane();
         //line Chart, child of Anchor
         LineChart<Number, Number> sc = new LineChart<>(new NumberAxis(), new NumberAxis());
-        sc.setPrefHeight(210);
-        sc.setPrefWidth(290);
+        sc.setPrefHeight(0);
+        sc.setPrefWidth(400);
         XYChart.Series line = new XYChart.Series();
-        XYChart.Series lineAnomal = new XYChart.Series();
-        sc.getData().addAll(line,lineAnomal);
-        lineAnomal.getNode().setStyle("-fx-stroke: #01aa18;");
+        XYChart.Series lineAnomaly = new XYChart.Series();
+        sc.getData().addAll(line,lineAnomaly);
+        lineAnomaly.getNode().setStyle("-fx-stroke: #01aa18;");
 
         attribute1.addListener((ob, oldV, newV) -> {//to delete the old graph if attribute has changed
             timeStep.addListener((o, ov, nv) -> {
                 Platform.runLater(() -> {
                     if (!ZScoreAnomaly.containsKey(attribute1.getValue())) {// i dont think it's work
-                        lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), ZScoreReg.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                        lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
                     } else {
                         if (ZScoreAnomaly.get(attribute1.getValue()).contains(timeStep.intValue()))//if we are at att with anomal and there is anomal in the present time
-                            line.getData().add(new XYChart.Data<>(timeStep.getValue(), ZScoreReg.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                            line.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
                         else
-                            lineAnomal.getData().add(new XYChart.Data<>(timeStep.getValue(), ZScoreReg.get(attribute1.getValue().toString()).get(timeStep.intValue())));
+                            lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
                     }
                 });
             });
 
             if (!newV.equals(oldV)) {   //if change the attribute
-                lineAnomal.getData().clear();
+                lineAnomaly.getData().clear();
             }
         });
         sc.setAnimated(false);
@@ -175,10 +175,10 @@ public class ZScoreAlgorithm implements AnomalyDetector {
         ap.getChildren().add(sc);
         return ap;
     }
-    public HashMap<String, ArrayList<Float>>getZScoreReg(){
-        return this.ZScoreReg;
+    public HashMap<String, ArrayList<Float>> getzScoreRegression(){
+        return this.zScoreRegression;
     }
-    public HashMap<String, ArrayList<Integer>>getZscoreAnomal(){
+    public HashMap<String, ArrayList<Integer>> getZScoreAnomaly(){
         return this.ZScoreAnomaly;
     }
 }

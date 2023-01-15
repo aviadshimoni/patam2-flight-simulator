@@ -10,7 +10,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
-import viewModel.TimeSeries;
+import model.TimeSeries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -122,8 +122,8 @@ public class hybridAlgorithm {
 
         ad.learnNormal(tsReg);
         zScore.learnNormal(tsZscore);
-        ZScoreReg = zScore.getZScoreReg();
-        ZScoreAnomaly = zScore.getZscoreAnomal();
+        ZScoreReg = zScore.getzScoreRegression();
+        ZScoreAnomaly = zScore.getZScoreAnomaly();
 
         for (String key : attALG.keySet()) {    // Activate welze on all the attribute with 0.5-0.95 correlation
             if (attALG.get(key).nameALG.equals("Welzl"))
