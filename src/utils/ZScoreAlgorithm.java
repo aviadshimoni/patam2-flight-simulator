@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -22,7 +22,7 @@ public class ZScoreAlgorithm implements AnomalyDetector {
 
     public HashMap<String, ArrayList<Float>> avgMap;
 
-    public StringProperty attribute1 = new SimpleStringProperty();
+    public StringProperty attribute = new SimpleStringProperty();
     public DoubleProperty timeStep = new SimpleDoubleProperty();
 
 
@@ -143,16 +143,16 @@ public class ZScoreAlgorithm implements AnomalyDetector {
         sc.getData().addAll(line,lineAnomaly);
         lineAnomaly.getNode().setStyle("-fx-stroke: #01aa18;");
 
-        attribute1.addListener((ob, oldV, newV) -> {//to delete the old graph if attribute has changed
+        attribute.addListener((ob, oldV, newV) -> {//to delete the old graph if attribute has changed
             timeStep.addListener((o, ov, nv) -> {
                 Platform.runLater(() -> {
-                    if (!ZScoreAnomaly.containsKey(attribute1.getValue())) {// i dont think it's work
-                        lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
+                    if (!ZScoreAnomaly.containsKey(attribute.getValue())) {// i dont think it's work
+                        lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute.getValue()).get(timeStep.intValue())));
                     } else {
-                        if (ZScoreAnomaly.get(attribute1.getValue()).contains(timeStep.intValue()))//if we are at att with anomal and there is anomal in the present time
-                            line.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
+                        if (ZScoreAnomaly.get(attribute.getValue()).contains(timeStep.intValue()))//if we are at att with anomal and there is anomal in the present time
+                            line.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute.getValue()).get(timeStep.intValue())));
                         else
-                            lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
+                            lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute.getValue()).get(timeStep.intValue())));
                     }
                 });
             });

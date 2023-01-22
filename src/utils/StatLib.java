@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 import java.lang.Math;
 

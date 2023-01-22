@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -159,10 +159,10 @@ public class hybridAlgorithm {
                         cfmore95.put(atts.get(i), c);
                     }  // if contain the attribute we'll take the max
 
-                    else if (attALG.get(atts.get(i)).corrlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
+                    else if (attALG.get(atts.get(i)).correlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
                     {
                         attALG.get(atts.get(i)).feature2 = atts.get(j);//change the name of the correlate att
-                        attALG.get(atts.get(i)).corrlation = Math.abs(p);//change the val of correlation
+                        attALG.get(atts.get(i)).correlation = Math.abs(p);//change the val of correlation
                         attALG.get(atts.get(i)).nameALG = "Regression";
                         cfmore95.put(atts.get(i), c);
                     }
@@ -173,10 +173,10 @@ public class hybridAlgorithm {
 
                     }  // if contain the attribute we'll take the max
 
-                    else if (attALG.get(atts.get(i)).corrlation < Math.abs(p))//if the the val with the different att is higher,we'll take the other att
+                    else if (attALG.get(atts.get(i)).correlation < Math.abs(p))//if the the val with the different att is higher,we'll take the other att
                     {
                         attALG.get(atts.get(i)).feature2 = atts.get(j);
-                        attALG.get(atts.get(i)).corrlation = Math.abs(p);
+                        attALG.get(atts.get(i)).correlation = Math.abs(p);
                         attALG.get(atts.get(i)).nameALG = "Welzl";
                     }
                 } else if (Math.abs(p) < 0.5) {
@@ -184,10 +184,10 @@ public class hybridAlgorithm {
                         CorrelatedFeatureForAll ca = new CorrelatedFeatureForAll(atts.get(i), atts.get(j), "ZScore", Math.abs(p));
                         attALG.put(atts.get(i), ca);
                     }  // if contain the attribute we'll take the max
-                    else if (attALG.get(atts.get(i)).corrlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
+                    else if (attALG.get(atts.get(i)).correlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
                     {
                         attALG.get(atts.get(i)).feature2 = atts.get(j);
-                        attALG.get(atts.get(i)).corrlation = Math.abs(p);
+                        attALG.get(atts.get(i)).correlation = Math.abs(p);
                         attALG.get(atts.get(i)).nameALG = "ZScore";
                     }
                 }

@@ -21,7 +21,7 @@ public class Main extends Application {
         System.out.println(getClass().getResource(url).getPath());
         FXMLLoader fxml= new FXMLLoader(getClass().getResource(url));
         Parent root = fxml.load();
-        primaryStage.setTitle("TIOA Flight simulator v0.666");
+        primaryStage.setTitle("TIOA Flight simulator v1.1");
         ControllerView controllerView = fxml.getController();
         controllerView.init(myViewModelController);
         primaryStage.setScene(new Scene(root, 1100, 650));

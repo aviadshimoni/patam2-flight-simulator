@@ -1,9 +1,9 @@
 package model;
 
-import algorithms.CorrelatedFeatures;
-import algorithms.Line;
-import algorithms.Point;
-import algorithms.StatLib;
+import utils.CorrelatedFeatures;
+import utils.Line;
+import utils.Point;
+import utils.StatLib;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -82,8 +82,6 @@ public class TimeSeries {
     }
 
     public float getValueByTime(String index, int time) {
-//        System.out.println(index);
-//        System.out.println(time);
         return timeSeries.get(index).get(time);
     }
 

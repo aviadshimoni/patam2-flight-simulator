@@ -1,8 +1,8 @@
 package model;
 
-import algorithms.SimpleAnomalyDetector;
-import algorithms.ZScoreAlgorithm;
-import algorithms.hybridAlgorithm;
+import utils.SimpleAnomalyDetector;
+import utils.ZScoreAlgorithm;
+import utils.hybridAlgorithm;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -39,14 +39,14 @@ public class Model extends Observable implements SimulatorModel {
     public ZScoreAlgorithm zScore;
     public hybridAlgorithm hyperALG;
 
-    public StringProperty attribute1;
+    public StringProperty attribute;
     public DoubleProperty timeStep;
 
     public Model() {
         this.properties = new FlightSetting();
         this.options = new Options();
         this.isConnect = false;
-        this.attribute1 = new SimpleStringProperty();
+        this.attribute = new SimpleStringProperty();
         this.timeStep = new SimpleDoubleProperty();
     }
 
@@ -95,7 +95,7 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     synchronized public void displayFlight(boolean isConnected) {
-        int i = 0;
+        int i;
         int sizeTS = tsAnomal.getSize();
 
         for (i = (int) time; i < sizeTS; i++) {
@@ -249,15 +249,15 @@ public class Model extends Observable implements SimulatorModel {
     public void initAlgorithmData() {
         if (algName.equals("SimpleAnomalyDetector")) {
             ad.timeStep.bind(timeStep);
-            ad.attribute1.bind(attribute1);
+            ad.attribute1.bind(attribute);
         }
         else if (algName.equals("ZScoreAlgorithm")) {
             zScore.timeStep.bind(timeStep);
-            zScore.attribute1.bind(attribute1);
+            zScore.attribute.bind(attribute);
         }
         else {
             hyperALG.timeStep.bind(timeStep);
-            hyperALG.attribute1.bind(attribute1);
+            hyperALG.attribute1.bind(attribute);
         }
     }
 

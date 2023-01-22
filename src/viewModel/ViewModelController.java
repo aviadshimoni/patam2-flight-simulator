@@ -100,7 +100,7 @@ public class ViewModelController extends Observable implements Observer {
         });
 
         chosenAttribute.addListener((o, ov, nv) -> {
-            model.attribute1.bind(chosenAttribute);
+            model.attribute.bind(chosenAttribute);
             if(isAnomalyAlgorithmLoaded == true)
                 model.bindAlgorithmToTimestep();
         });
