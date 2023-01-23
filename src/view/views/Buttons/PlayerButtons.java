@@ -58,9 +58,9 @@ public class PlayerButtons extends AnchorPane {
             playerButtonsController.sliderTime.valueProperty().bindBidirectional(sliderTime);
             choiceSpeed.bind(playerButtonsController.choiceSpeed.valueProperty());
 
-            onOpenCSVTrain.bind(playerButtonsController.onOpenCSVTrain);
-            onOpenCSVTest.bind(playerButtonsController.onOpenCSVTest);
-            onOpenXML.bind(playerButtonsController.onOpenXML);
+            onOpenCSVTrain.bind(playerButtonsController.onOpenRegularCSV);
+            onOpenCSVTest.bind(playerButtonsController.onOpenAnomalyCSV);
+            onOpenXML.bind(playerButtonsController.onOpenSettingsXML);
             onAnomalyDetector.bind(playerButtonsController.onAnomalyDetector);
             onPlay.bind(playerButtonsController.onPlay);
             onPause.bind(playerButtonsController.onPause);

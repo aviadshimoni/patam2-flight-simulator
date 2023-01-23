@@ -180,7 +180,7 @@ public class ViewModelController extends Observable implements Observer {
                 timeSeriesAnomaly = new TimeSeries(chosen.getPath());
                 model.setTimeSeries(timeSeriesAnomaly, "Test");
 
-                attributeList.addAll(timeSeriesAnomaly.getAttributes());    // Init attributes list
+                attributeList.addAll(timeSeriesAnomaly.getAttributes());
                 sizeTimeSeries.setValue(timeSeriesAnomaly.getSize());
                 altimeter.setValue("0");
                 airSpeed.setValue("0");

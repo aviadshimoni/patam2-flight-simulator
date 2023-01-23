@@ -25,15 +25,15 @@ public class PlayerButtonsController {
     TextField minutes;
 
     @FXML
-    Button playBTN, stopBTN ,pauseBTN;
+    Button playBTN, stopBTN ,pauseBTN, anomalyBTN, regBTN, settingsBTN;
 
-    public BooleanProperty onOpenCSVTrain, onOpenCSVTest, onOpenXML, onPlay, onPause, onSpeed, onStop,
+    public BooleanProperty onOpenRegularCSV, onOpenAnomalyCSV, onOpenSettingsXML, onPlay, onPause, onSpeed, onStop,
             onRewind, onForward, onAnomalyDetector;
 
     public PlayerButtonsController() {
-        onOpenCSVTrain = new SimpleBooleanProperty();
-        onOpenCSVTest = new SimpleBooleanProperty();
-        onOpenXML = new SimpleBooleanProperty();
+        onOpenRegularCSV = new SimpleBooleanProperty();
+        onOpenAnomalyCSV = new SimpleBooleanProperty();
+        onOpenSettingsXML = new SimpleBooleanProperty();
         onAnomalyDetector = new SimpleBooleanProperty();
         onPlay = new SimpleBooleanProperty();
         onPause = new SimpleBooleanProperty();
@@ -42,9 +42,9 @@ public class PlayerButtonsController {
         onRewind = new SimpleBooleanProperty();
         onForward = new SimpleBooleanProperty();
             //set init values
-        onOpenCSVTest.setValue(false);
-        onOpenCSVTrain.setValue(false);
-        onOpenXML.setValue(false);
+        onOpenAnomalyCSV.setValue(false);
+        onOpenRegularCSV.setValue(false);
+        onOpenSettingsXML.setValue(false);
         onAnomalyDetector.setValue(false);
         onPlay.setValue(false);
         onPause.setValue(false);
@@ -60,16 +60,16 @@ public class PlayerButtonsController {
         choiceSpeed.setValue(1.0);
     }
 
-    public void onOpenCSVTrain() {
-        onOpenCSVTrain.setValue(!onOpenCSVTrain.getValue());
+    public void onOpenRegularCSV() {
+        onOpenRegularCSV.setValue(!onOpenRegularCSV.getValue());
     }
 
-    public void onOpenCSVTest() {
-        onOpenCSVTest.setValue(!onOpenCSVTest.getValue());
+    public void onOpenAnomalyCSV() {
+        onOpenAnomalyCSV.setValue(!onOpenAnomalyCSV.getValue());
     }
 
-    public void onOpenXML() {
-        onOpenXML.setValue(!onOpenXML.getValue());
+    public void onOpenSettingsXML() {
+        onOpenSettingsXML.setValue(!onOpenSettingsXML.getValue());
     }
     public void onAnomalyDetector(){
         onAnomalyDetector.setValue(!onAnomalyDetector.getValue());
@@ -83,7 +83,6 @@ public class PlayerButtonsController {
         playBTN.setDisable(true);
         pauseBTN.setDisable(false);
         stopBTN.setDisable(false);
-
     }
     public void onPause() {
         onPause.setValue(!onPause.getValue());
@@ -92,7 +91,6 @@ public class PlayerButtonsController {
     public void onStop() {
         onStop.setValue(!onStop.getValue());
         disablePlayBTN();
-
     }
     public void onForward() {
         onForward.setValue(!onForward.getValue());

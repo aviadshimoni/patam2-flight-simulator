@@ -41,6 +41,7 @@ public class Model extends Observable implements SimulatorModel {
 
     public StringProperty attribute1;
     public DoubleProperty timeStep;
+    private Thread displayFlightThread;
 
     public Model() {
         this.properties = new FlightSetting();
@@ -53,7 +54,7 @@ public class Model extends Observable implements SimulatorModel {
     @Override
     public boolean connectToServer(String ip, double port) {
         try {
-            socket = new Socket("127.0.0.1", 5402);
+            socket = new Socket("127.0.0.1", 5400);
             out = new PrintWriter(socket.getOutputStream());
             return true;
 
@@ -63,34 +64,22 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     synchronized public void playFile() {
-        if (options.afterForward) {
-            options.afterForward = false;
+        if (options.isAfterForward()) {
+            options.setAfterForward(false);
             properties.setPlaySpeed(100);
-        } else if (options.afterRewind) {
-            options.rewind = false;
-        } else if (options.afterPause) {
+        } else if (options.isAfterRewind()) {
+            options.setRewind(false);
+        } else if (options.isAfterPause()) {
             this.notify();
-            options.pause = false;
-            options.afterPause = false;
-        } else if (options.afterStop) {  //creating a new thread to run displayFlight()
-            if (isConnect) {
-                displaySetting = new Thread(() -> displayFlight(true), "Thread of displaySetting function");
-                displaySetting.start();
-                options.afterStop = false;
-            } else {
-                displaySetting = new Thread(() -> displayFlight(false), "Thread of displaySetting function");
-                displaySetting.start();
-                options.afterStop = false;
+            options.setPause(false);
+            options.setAfterPause(false);
+        } else {
+            if (!options.isAfterStop()){
+                isConnect = connectToServer(properties.getIp(), properties.getPort());
             }
-        } else {    //first time of Play
-            isConnect = connectToServer(properties.getIp(), properties.getPort());
-            if (isConnect) {
-                displaySetting = new Thread(() -> displayFlight(true), "Thread of displaySetting function");
-                displaySetting.start();
-            } else {    //if not connectToFG
-                displaySetting = new Thread(() -> displayFlight(false), "Thread of displaySetting function");
-                displaySetting.start();
-            }
+            options.setAfterStop(false);
+            displayFlightThread = new Thread(() -> displayFlight(isConnect), "FlightDisplayThread");
+            displayFlightThread.start();
         }
     }
 
@@ -100,7 +89,7 @@ public class Model extends Observable implements SimulatorModel {
 
         for (i = (int) time; i < sizeTS; i++) {
             timeStep.setValue(time);
-            while (options.pause || options.scroll || options.afterStop || options.forward || options.rewind)  //pause needs to be replaced with thread( works only one time now)
+            while (options.pause || options.scroll || options.afterStop || options.forward || options.rewind)
             {
                 try {
                     if (options.afterStop)
@@ -110,18 +99,11 @@ public class Model extends Observable implements SimulatorModel {
                         this.wait();
 
                     if (options.forward) {
-                        if (i < sizeTS - 151)
-                            i += 150;
-                        else
-                            i = sizeTS;
+                        i = Math.min(sizeTS - 151, i + 150);
                         options.forward = false;
                     }
-
                     if (options.rewind) {
-                        if ((i - 150) > 0)
-                            i -= 150;
-                        else
-                            i = 1;
+                        i = Math.max(1, i - 150);
                         options.rewind = false;
                     }
 
@@ -221,27 +203,30 @@ public class Model extends Observable implements SimulatorModel {
 
     // ***** Algorithm Functions ***** //
 
-    public Boolean loadAnomalyDetector(String path, String nameALG) throws Exception {//String input
+    public boolean loadAnomalyDetector(String path, String nameALG) throws Exception {
         algName = nameALG.split("\\.")[0];
         URLClassLoader urlClassLoader = URLClassLoader.newInstance(new URL[]{new URL("file:\\" + path)});
         Class<?> c = urlClassLoader.loadClass("algorithms."+algName);
+        new Thread(() -> initAlgorithmData()).start();
 
-        if (algName.equals("hybridAlgorithm")) {
-            hyperALG = (hybridAlgorithm) c.newInstance();
-            new Thread(() -> initAlgorithmData()).start();   //needs if to init data at first time
-            hyperALG.learnNormal(tsReg);
-            hyperALG.detect(tsAnomal);
-
-        } else if (algName.equals("SimpleAnomalyDetector")) {
-            ad = (SimpleAnomalyDetector) c.newInstance();
-            new Thread(() -> initAlgorithmData()).start();
-            ad.learnNormal(tsReg);
-            ad.detect(tsAnomal);
-        } else if (algName.equals("ZScoreAlgorithm")) {
-            zScore = (ZScoreAlgorithm) c.newInstance();
-            new Thread(() -> initAlgorithmData()).start();
-            zScore.learnNormal(tsReg);
-            zScore.detect(tsAnomal);
+        switch(algName) {
+            case "hybridAlgorithm":
+                hyperALG = (hybridAlgorithm) c.newInstance();
+                hyperALG.learnNormal(tsReg);
+                hyperALG.detect(tsAnomal);
+                break;
+            case "SimpleAnomalyDetector":
+                ad = (SimpleAnomalyDetector) c.newInstance();
+                ad.learnNormal(tsReg);
+                ad.detect(tsAnomal);
+                break;
+            case "ZScoreAlgorithm":
+                zScore = (ZScoreAlgorithm) c.newInstance();
+                zScore.learnNormal(tsReg);
+                zScore.detect(tsAnomal);
+                break;
+            default:
+                throw new Exception("Invalid algorithm name.");
         }
         return false;
     }
@@ -283,31 +268,26 @@ public class Model extends Observable implements SimulatorModel {
 
     public boolean openXML() {
         FileChooser fc = new FileChooser();
-        fc.setTitle("open XML file");
+        fc.setTitle("Open Settings XML file");
         fc.setInitialDirectory(new File("./"));
         File chosen = fc.showOpenDialog(null);
-        String absolutePath = chosen.getAbsolutePath();
 
-        if(chosen == null) {
-            fileNotFoundAlert("XML");
-        } else {
-            if (!chosen.getName().contains(".xml"))  //checking the file
-            {
-                wrongFileAlert("XML");
-            } else {
-                try {
-                    this.properties = readFromXML(absolutePath);
-                    if (this.properties != null) {
-                        createMapAttribute();
-                        return true;
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                catch (java.lang.ArrayIndexOutOfBoundsException e) {
-                    brokenFileAlert();
-                }
+        if (chosen == null || !chosen.getName().contains(".xml")) {
+            if (chosen == null) fileNotFoundAlert("Settings XML");
+            else wrongFileAlert("Settings XML");
+            return false;
+        }
+
+        try {
+            this.properties = readFromXML(chosen.getAbsolutePath());
+            if (this.properties != null) {
+                createMapAttribute();
+                return true;
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+            brokenFileAlert();
         }
         return false;
     }
@@ -340,7 +320,7 @@ public class Model extends Observable implements SimulatorModel {
         lst.add(createAttribute("roll", 17, -38, 43));
         lst.add(createAttribute("yaw", 20, -29, 91));
         settings.setAttributes(lst);
-        settings.setPort((double) 5402);
+        settings.setPort((double) 5400);
         settings.setIp("127.0.0.1");
         settings.setPlaySpeed(100);
 
@@ -359,7 +339,6 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     public FlightSetting readFromXML(String fileName) throws IOException {
-
         System.out.println(fileName);
         FileInputStream fis = new FileInputStream(fileName);
         XMLDecoder decoder = new XMLDecoder(fis);

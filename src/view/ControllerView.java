@@ -94,11 +94,11 @@ public class ControllerView extends Pane implements Observer {
             }
         });
 
-
-        listView.attributesController.listView.setItems(myViewModelController.attributeList);
-
         graphs.selectedAttribute.bind(listView.attributesController.listView.getSelectionModel().selectedItemProperty());
         graphs.correlatedAttribute.bind(myViewModelController.correlateFeature);
+
+        listView.attributesController.listView.setItems(myViewModelController.attributeList);
+        listView.attributesController.listView.getSelectionModel().select(0);
         myViewModelController.chosenAttribute.bind(listView.attributesController.listView.getSelectionModel().selectedItemProperty());
     }
 

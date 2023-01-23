@@ -26,6 +26,38 @@ public class Options {
         this.playSpeed = 100;
     }
 
+    public boolean isAfterForward() {
+        return afterForward;
+    }
+
+    public void setAfterForward(boolean afterForward) {
+        this.afterForward = afterForward;
+    }
+
+    public boolean isAfterRewind() {
+        return afterRewind;
+    }
+
+    public void setRewind(boolean rewind) {
+        this.rewind = rewind;
+    }
+
+    public boolean isAfterPause() {
+        return afterPause;
+    }
+
+    public void setAfterPause(boolean afterPause) {
+        this.afterPause = afterPause;
+    }
+
+    public void setAfterStop(boolean afterStop) {
+        this.afterStop = afterStop;
+    }
+
+    public boolean isAfterStop() {
+        return afterStop;
+    }
+
     public void setStop(boolean stop) {
         this.stop = stop;
     }
