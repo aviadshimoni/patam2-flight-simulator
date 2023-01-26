@@ -1,9 +1,9 @@
 package model;
 
-import algorithms.CorrelatedFeatures;
-import algorithms.Line;
-import algorithms.Point;
-import algorithms.StatLib;
+import utils.CorrelatedFeatures;
+import utils.Line;
+import utils.Point;
+import utils.StatLib;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -82,8 +82,6 @@ public class TimeSeries {
     }
 
     public float getValueByTime(String index, int time) {
-//        System.out.println(index);
-//        System.out.println(time);
         return timeSeries.get(index).get(time);
     }
 
@@ -127,7 +125,7 @@ public class TimeSeries {
 
                 if (Math.abs(p) > 0.9) {//only if above o.
                     Point[] ps = toPoints(ts.getAttributeData(timeSeriesAttributes.get(i)), ts.getAttributeData(timeSeriesAttributes.get(j)));
-                    Line lin_reg = StatLib.linear_reg(ps);
+                    Line lin_reg = StatLib.LinearRegression(ps);
                     float threshold = findThreshold(ps, lin_reg) * 1.1f; // 10% increase
                     CorrelatedFeatures c = new CorrelatedFeatures(timeSeriesAttributes.get(i), timeSeriesAttributes.get(j), p, lin_reg, threshold);
                     correlatedFeatures.add(c);

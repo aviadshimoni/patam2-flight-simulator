@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -22,7 +22,7 @@ public class ZScoreAlgorithm implements AnomalyDetector {
 
     public HashMap<String, ArrayList<Float>> avgMap;
 
-    public StringProperty attribute1 = new SimpleStringProperty();
+    public StringProperty property = new SimpleStringProperty();
     public DoubleProperty timeStep = new SimpleDoubleProperty();
 
 
@@ -56,14 +56,14 @@ public class ZScoreAlgorithm implements AnomalyDetector {
         x = col.get(colSize - 1);
         if (colSize == 1) {
             arrFloat = ListToArr(col);
-            if(StatLib.var(arrFloat) != 0)
-                return Math.abs((x - StatLib.avg(arrFloat))) / StatLib.var(arrFloat);
+            if(StatLib.variance(arrFloat) != 0)
+                return Math.abs((x - StatLib.avg(arrFloat))) / StatLib.variance(arrFloat);
             return 0;
         }
 
         arrFloat = ListToArr(col.subList(0, col.size() - 1));
         avg = StatLib.avg(arrFloat);
-        var = StatLib.var(arrFloat);
+        var = StatLib.variance(arrFloat);
 
         if (var < 0)
             return 0;
@@ -143,16 +143,16 @@ public class ZScoreAlgorithm implements AnomalyDetector {
         sc.getData().addAll(line,lineAnomaly);
         lineAnomaly.getNode().setStyle("-fx-stroke: #01aa18;");
 
-        attribute1.addListener((ob, oldV, newV) -> {//to delete the old graph if attribute has changed
+        property.addListener((ob, oldV, newV) -> {//to delete the old graph if attribute has changed
             timeStep.addListener((o, ov, nv) -> {
                 Platform.runLater(() -> {
-                    if (!ZScoreAnomaly.containsKey(attribute1.getValue())) {// i dont think it's work
-                        lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
+                    if (!ZScoreAnomaly.containsKey(property.getValue())) {// i dont think it's work
+                        lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(property.getValue()).get(timeStep.intValue())));
                     } else {
-                        if (ZScoreAnomaly.get(attribute1.getValue()).contains(timeStep.intValue()))//if we are at att with anomal and there is anomal in the present time
-                            line.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
+                        if (ZScoreAnomaly.get(property.getValue()).contains(timeStep.intValue()))//if we are at att with anomal and there is anomal in the present time
+                            line.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(property.getValue()).get(timeStep.intValue())));
                         else
-                            lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(attribute1.getValue()).get(timeStep.intValue())));
+                            lineAnomaly.getData().add(new XYChart.Data<>(timeStep.getValue(), zScoreRegression.get(property.getValue()).get(timeStep.intValue())));
                     }
                 });
             });

@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 import javafx.scene.layout.AnchorPane;
 import model.TimeSeries;
