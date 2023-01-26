@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 
 import javafx.application.Platform;
@@ -59,7 +59,6 @@ public class SimpleAnomalyDetector implements AnomalyDetector {
         tsReg = ts;
         ArrayList<String> atts = ts.getAttributes();
         int len = ts.timeSeries.get(ts.attributes.get(0)).size();
-
         float[][] vals = new float[atts.size()][len];
         for (int i = 0; i < atts.size(); i++) {
             for (int j = 0; j < len; j++) {
@@ -73,7 +72,7 @@ public class SimpleAnomalyDetector implements AnomalyDetector {
 
                 if (Math.abs(p) > 0.9) {    //only if above o.
                     Point[] ps = toPoints(ts.getAttributeData(atts.get(i)), ts.getAttributeData(atts.get(j)));
-                    Line lin_reg = StatLib.linear_reg(ps);
+                    Line lin_reg = StatLib.LinearRegression(ps);
                     float threshold = findThreshold(ps, lin_reg) * 1.1f;     // 10% increase
                     CorrelatedFeatures c = new CorrelatedFeatures(atts.get(i), atts.get(j), p, lin_reg, threshold);
                     cf.add(c);

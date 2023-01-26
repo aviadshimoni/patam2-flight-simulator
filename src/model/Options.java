@@ -58,19 +58,8 @@ public class Options {
         return afterStop;
     }
 
-    public void setStop(boolean stop) {
-        this.stop = stop;
-    }
-
     public void setPause(boolean pause) {
         this.pause = pause;
     }
 
-    public boolean isStop() {
-        return stop;
-    }
-
-    public boolean isForward() {
-        return forward;
-    }
 }

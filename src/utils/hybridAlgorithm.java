@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -125,7 +125,7 @@ public class hybridAlgorithm {
         ZScoreReg = zScore.getzScoreRegression();
         ZScoreAnomaly = zScore.getZScoreAnomaly();
 
-        for (String key : attALG.keySet()) {    // Activate welze on all the attribute with 0.5-0.95 correlation
+        for (String key : attALG.keySet()) {
             if (attALG.get(key).nameALG.equals("Welzl"))
                 circlesMap.put(attALG.get(key), algorithm.welzl(toListPoints(ts.getAttributeData(attALG.get(key).feature1), ts.getAttributeData(attALG.get(key).feature2))));
         }
@@ -145,13 +145,13 @@ public class hybridAlgorithm {
 
         for (int i = 0; i < atts.size(); i++) {
             for (int j = i + 1; j < atts.size(); j++) {
-                float p = StatLib.pearson(vals[i], vals[j]);    //for the pearson
+                float p = StatLib.pearson(vals[i], vals[j]);
                 float threshold;
                 if (Math.abs(p) >= 0.95) {
 
                     Point[] ps = toPoints(ts.getAttributeData(atts.get(i)), ts.getAttributeData(atts.get(j)));
-                    Line lin_reg = StatLib.linear_reg(ps);
-                    threshold = findThreshold(ps, lin_reg) * 1.1f; // 10% increase
+                    Line lin_reg = StatLib.LinearRegression(ps);
+                    threshold = findThreshold(ps, lin_reg) * 1.1f;
                     CorrelatedFeatures c = new CorrelatedFeatures(atts.get(i), atts.get(j), p, lin_reg, threshold);//att1_att2_pearsonCorrelate_null_threshold(the max one)
 
                     if (!attALG.containsKey(atts.get(i))) {
@@ -159,10 +159,10 @@ public class hybridAlgorithm {
                         cfmore95.put(atts.get(i), c);
                     }  // if contain the attribute we'll take the max
 
-                    else if (attALG.get(atts.get(i)).corrlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
+                    else if (attALG.get(atts.get(i)).correlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
                     {
                         attALG.get(atts.get(i)).feature2 = atts.get(j);//change the name of the correlate att
-                        attALG.get(atts.get(i)).corrlation = Math.abs(p);//change the val of correlation
+                        attALG.get(atts.get(i)).correlation = Math.abs(p);//change the val of correlation
                         attALG.get(atts.get(i)).nameALG = "Regression";
                         cfmore95.put(atts.get(i), c);
                     }
@@ -173,10 +173,10 @@ public class hybridAlgorithm {
 
                     }  // if contain the attribute we'll take the max
 
-                    else if (attALG.get(atts.get(i)).corrlation < Math.abs(p))//if the the val with the different att is higher,we'll take the other att
+                    else if (attALG.get(atts.get(i)).correlation < Math.abs(p))//if the the val with the different att is higher,we'll take the other att
                     {
                         attALG.get(atts.get(i)).feature2 = atts.get(j);
-                        attALG.get(atts.get(i)).corrlation = Math.abs(p);
+                        attALG.get(atts.get(i)).correlation = Math.abs(p);
                         attALG.get(atts.get(i)).nameALG = "Welzl";
                     }
                 } else if (Math.abs(p) < 0.5) {
@@ -184,10 +184,10 @@ public class hybridAlgorithm {
                         CorrelatedFeatureForAll ca = new CorrelatedFeatureForAll(atts.get(i), atts.get(j), "ZScore", Math.abs(p));
                         attALG.put(atts.get(i), ca);
                     }  // if contain the attribute we'll take the max
-                    else if (attALG.get(atts.get(i)).corrlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
+                    else if (attALG.get(atts.get(i)).correlation < Math.abs(p))//if the the val with the different att is higher,we'll tack the other att
                     {
                         attALG.get(atts.get(i)).feature2 = atts.get(j);
-                        attALG.get(atts.get(i)).corrlation = Math.abs(p);
+                        attALG.get(atts.get(i)).correlation = Math.abs(p);
                         attALG.get(atts.get(i)).nameALG = "ZScore";
                     }
                 }

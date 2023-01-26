@@ -1,8 +1,8 @@
 package model;
 
-import algorithms.SimpleAnomalyDetector;
-import algorithms.ZScoreAlgorithm;
-import algorithms.hybridAlgorithm;
+import utils.SimpleAnomalyDetector;
+import utils.ZScoreAlgorithm;
+import utils.hybridAlgorithm;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -39,7 +39,7 @@ public class Model extends Observable implements SimulatorModel {
     public ZScoreAlgorithm zScore;
     public hybridAlgorithm hyperALG;
 
-    public StringProperty attribute1;
+    public StringProperty attribute;
     public DoubleProperty timeStep;
     private Thread displayFlightThread;
 
@@ -47,7 +47,7 @@ public class Model extends Observable implements SimulatorModel {
         this.properties = new FlightSetting();
         this.options = new Options();
         this.isConnect = false;
-        this.attribute1 = new SimpleStringProperty();
+        this.attribute = new SimpleStringProperty();
         this.timeStep = new SimpleDoubleProperty();
     }
 
@@ -93,7 +93,7 @@ public class Model extends Observable implements SimulatorModel {
             {
                 try {
                     if (options.afterStop)
-                        displaySetting.stop();
+                        displaySetting.join();
 
                     if (options.afterPause)
                         this.wait();
@@ -206,7 +206,7 @@ public class Model extends Observable implements SimulatorModel {
     public boolean loadAnomalyDetector(String path, String nameALG) throws Exception {
         algName = nameALG.split("\\.")[0];
         URLClassLoader urlClassLoader = URLClassLoader.newInstance(new URL[]{new URL("file:\\" + path)});
-        Class<?> c = urlClassLoader.loadClass("algorithms."+algName);
+        Class<?> c = urlClassLoader.loadClass("utils."+algName);
         new Thread(() -> initAlgorithmData()).start();
 
         switch(algName) {
@@ -234,15 +234,15 @@ public class Model extends Observable implements SimulatorModel {
     public void initAlgorithmData() {
         if (algName.equals("SimpleAnomalyDetector")) {
             ad.timeStep.bind(timeStep);
-            ad.attribute1.bind(attribute1);
+            ad.attribute1.bind(attribute);
         }
         else if (algName.equals("ZScoreAlgorithm")) {
             zScore.timeStep.bind(timeStep);
-            zScore.attribute1.bind(attribute1);
+            zScore.property.bind(attribute);
         }
         else {
             hyperALG.timeStep.bind(timeStep);
-            hyperALG.attribute1.bind(attribute1);
+            hyperALG.attribute1.bind(attribute);
         }
     }
 
@@ -256,11 +256,11 @@ public class Model extends Observable implements SimulatorModel {
     }
 
     public Callable<AnchorPane> getPainter() {
-        if (algName.equals("SimpleAnomalyDetector"))    // Reg
+        if (algName.equals("SimpleAnomalyDetector"))
             return () -> ad.paint();
-        else if (algName.equals("ZScoreAlgorithm")) // zScore
+        else if (algName.equals("ZScoreAlgorithm"))
             return () -> zScore.paint();
-        else    //HyperALG
+        else
             return () -> hyperALG.paint();
     }
 
