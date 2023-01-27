@@ -207,7 +207,6 @@ public class Model extends Observable implements SimulatorModel {
         algName = nameALG.split("\\.")[0];
         URLClassLoader urlClassLoader = URLClassLoader.newInstance(new URL[]{new URL("file:\\" + path)});
         Class<?> c = urlClassLoader.loadClass("utils."+algName);
-        new Thread(() -> initAlgorithmData()).start();
 
         switch(algName) {
             case "hybridAlgorithm":
@@ -228,6 +227,7 @@ public class Model extends Observable implements SimulatorModel {
             default:
                 throw new Exception("Invalid algorithm name.");
         }
+        new Thread(() -> initAlgorithmData()).start();
         return false;
     }
 
