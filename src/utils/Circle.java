@@ -1,4 +1,4 @@
-package algorithms;
+package utils;
 
 class Circle {
 
